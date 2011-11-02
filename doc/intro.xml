@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
+"http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<chapter id="intro">
+  <title>Introduction</title>
+
+  <para>The CB2Java project's goal is to simplify the lives of developers
+  (e.g. the author) charged with writing Java applications that communicate
+  with COBOL applications. The main motivation for wiriting this library was
+  that in the limited number of available (free) libraries, none had been
+  designed around a dynamic approach. While it may seem strage to write about
+  dynamic approaches in Java as it is a statically typed, compiled language
+  but it solves a lot of issues that arise in a enterprise environment where
+  almost nothing stays the same for very long.</para>
+
+  <note>
+    <para>CB2Java is <emphasis>not</emphasis> a standalone tool for editing
+    and viewing COBOL data.</para>
+  </note>
+
+  <para>With tools that require class generation (or worse, hand-coded
+  classes) to parse data defined in COBOL copybooks, a lot of changes require
+  regenerating and recompiling the code even when application logic does not
+  change. For example, if an element in a copybook is defined as being a 6
+  digit integer, you will most likely end up using an int to represent that
+  value in Java. If later that element is increased to 8 digits, your Java
+  code is still correct. An int will still hold the value. But if you
+  generated the code to parse the message, you need to regenerate the classes
+  and recompile. Some readers might be thinking "that's great but it almost
+  never happens because it would break other applications." This is true to
+  some extent but often a secondary copybook is defined that differs only in
+  one element. With CB2Java, one Java module can use two different copybooks
+  by merely changing the copybook instance. With a generated approach, you
+  need two sets of generated classes.</para>
+
+  <para>There are a lot of other ways that a generated approach provides
+  benefits that cannotbe realized effectively with a generated approach. As
+  time permits, this documentation will detail more such techniques.</para>
+
+  <para>The Cb2Java is meant to be simple to use and limit the amount of
+  esoteric knowledge needed to make use of it. COBOL is esoteric enough, there
+  is no need to add make it more painful. As such, the documentation here is
+  terse. As time permits it will be expaneded to contain more detailed
+  information but the beginning sections will remain focused on getting
+  started and making use of the tool rapdily.</para>
+</chapter>

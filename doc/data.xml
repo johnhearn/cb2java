@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.2//EN"
+"http://www.oasis-open.org/docbook/xml/4.0/docbookx.dtd" [
+<!ENTITY cb2j-long "Copybook and Application Data to Java">
+<!ENTITY cb2j "Copy2Java">
+<!ENTITY pic "PICTURE">
+]>
+<chapter>
+  <title id="data">Working with Application Data</title>
+
+  <para>The first thing that needs to be done in order to work with
+  application data is to create a new <classname>Copybook</classname> instance
+  using the <classname>CopybookParser</classname> class. To do this, supply an
+  <classname>InputStream</classname> (or <classname>Reader</classname>) to the
+  <methodname>parse</methodname> method. This method also takes a
+  <classname>String</classname> for the name. It is recommended that you
+  supply a unique name at this point but it's not important exaclty what you
+  use, just that it's meaningful and hopefully unique. See the <link
+  linkend="parser">parser</link> documentation for more detail.</para>
+
+  <para>Once you have an instance of the <classname>Copybook</classname>
+  class, you can create a new <classname>Record</classname> with the
+  <methodname>createnew</methodname> method or you can create a
+  <classname>Record</classname> from existing data using one of the
+  <methodname>parse</methodname> methods. There are two versions of the
+  <methodname>parse</methodname> method, one taking an
+  <classname>InputStream</classname> and the other taking a <type>byte</type>
+  array. One key setting to note at this point is the encoding setting on the
+  <classname>Copybook</classname> class. If no action is taken to modify this
+  setting, it will default to the host system's default encoding. You can also
+  set this encoding using the system property
+  <property>cb2java.encoding</property> or by creating a file on the class
+  path called <property>copybook.props</property> that contains a properly
+  named encoding. You may also programmatically set the encoding on the
+  <classname>Copybook</classname> instance, overriding any other settings.
+  There is intentionally no <methodname>parse</methodname> method that takes a
+  <classname>String</classname> because conversion to
+  <classname>String</classname> will corrupt data in many COBOL types in
+  irreversible ways and should be avoided.</para>
+
+  <para>Once you have created a <classname>Record</classname> object you can
+  programmatically browse it's tree and read or modify the data. Each node,
+  including the <classname>Record</classname> itself is an instance of the
+  <classname>Data</classname> class. There are two main types of
+  <classname>Data</classname> class: groups and values. Groups contain other
+  elements and cannot be modified directly. Values never contain children and
+  are modifiable. The <classname>Record</classname> class is a special type of
+  <classname>GroupData</classname> that is always the root of the record tree.
+  The easiest way to distinguish between groups and value objects is to call
+  the <methodname>isLeaf</methodname> method. A value is a 'leaf' and a group
+  is not.</para>
+
+  <para>Groups mainly have identity and children. When working with groups,
+  the main action to be taken is to retrieve it's children. A group's children
+  can contain values (leaves) and other groups.</para>
+
+  <para>There are currently four types of
+  <classname>ValueData</classname>.</para>
+
+  <para><simplelist>
+      <member><classname>CharData</classname></member>
+
+      <member><classname>IntegerData</classname></member>
+
+      <member><classname>DecimalData</classname></member>
+
+      <member><classname>FloatData</classname></member>
+    </simplelist></para>
+
+  <para>All leaf <classname>Data</classname> types have
+  <classname>Object</classname> versions for retrieving and setting the
+  values. In addition, all leaf <classname>Data</classname> objects take
+  <classname>String</classname> values and attempt to convert them to the
+  proper type.</para>
+
+  <para>The use of these should be fairly intuitive but the basic idea is that
+  any data associated numeric type that has no decimal portion will be
+  represented in an <classname>IntegerData</classname>. All other numeric
+  types except floating-point types are represented in
+  <classname>DecimalData</classname>. Anything that is not strictly numeric is
+  represented in a <classname>CharData</classname>. Boolean types are not
+  currently supported. Floating-point types are not strictly decimal types and
+  have special rules.</para>
+
+  <sect1>
+    <title>CharData</title>
+
+    <para><classname>CharData</classname> objects are used to represent text
+    data. It consists of normal text data and is always described by an
+    <classname>AlphaNumeric</classname> definition object. The validation
+    rules for alphanumeric depend on the PICTURE clause and how it specifies
+    which elements can be in what positions and the length of the element. The
+    'natural' Java type for <classname>CharData</classname> is
+    <classname>String</classname></para>
+  </sect1>
+
+  <sect1>
+    <title>IntegerData</title>
+
+    <para><classname>IntegerData</classname> objects represent numeric types
+    that have no fraction part. The validation for these types is that no
+    fraction is included and the number of digits are within the range
+    specified by the PICTURE clause of the elements definition. The 'natural'
+    Java type for <classname>IntegerData</classname> is
+    <classname>java.math.BigInteger</classname></para>
+  </sect1>
+
+  <sect1>
+    <title>DecimalData</title>
+
+    <para><classname>DecimalData</classname> objects are for numeric data
+    types that do contain a fractional portion. Validation rules for
+    <classname>DecimalData</classname> are that both the fractional portion
+    and the integer portion are within their respective ranges. The 'natural'
+    Java type for <classname>DecimalData</classname> is
+    <classname>java.math.BigDecimal</classname>.</para>
+  </sect1>
+
+  <sect1>
+    <title>FloatData</title>
+
+    <para><classname>FloatData</classname> objects are used to represent
+    single and double precision floating point types. Floating point is
+    treated separately from other numeric types because the fractional portion
+    of a floating-point number is not decimal and the rules for validation are
+    very different for floating-point data. Floating-point validation requires
+    that the number specified is exactly representable in floating point
+    representation specified by its definition element. Floating-point
+    representations are hardware specific in COBOL and not all numbers that
+    can be represented on one platform can be represented on all others. Java
+    uses IEEE-754 floating point representation which presents a problem when
+    data is in another form. Because of this issue the 'natural' Java type in
+    cb2java is <classname>BigDecimal</classname>. The reasoning is that all
+    floating point types should be representable as decimal. However, be aware
+    that most BigDecimal values can not be converted exactly to floating
+    point. If the underlying representation is IEEE-754, <type>float</type>
+    and <type>double</type> Java types (depending on the precision of the
+    COBOL type) are absolutely safe to use and are generally preferable. It
+    may also be possible to safely work with Java <type>floats</type> and
+    <type>doubles</type> when the underlying data is not represented as
+    IEEE-754 with careful management of the precision of the integer and
+    (especially) the fraction portion.</para>
+  </sect1>
+
+  <sect1>
+    <title>Conclusion</title>
+
+    <para>The four main types of <classname>Data</classname> are really the
+    heart of the design behind the CB2Java project. By mapping each COBOL type
+    to one of these four, working with COBOL data is very much simplified.
+    These Objects are created dynamically as the data is parsed which removes
+    the requirement for brittle generated code and recompiling code for
+    trivial changes to the field layouts such as the size of the
+    element.</para>
+  </sect1>
+</chapter>

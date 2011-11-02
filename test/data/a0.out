@@ -1,0 +1,18 @@
+
+C:\code\copybook\test>"C:\Program Files\Java\jdk1.6.0\bin\java" -cp C:\jython\jython.jar;C:\code\copybook\build\jar\cb2java.jar org.python.util.jython gen.py data/a.cpy data/a.data 
+ROOT
+A:TEST
+B:DATA
+C:-00023
+D:0100
+SUB
+E:ABC
+F:DEF
+SUB
+E:GHI
+F:JKL
+G:00000.10
+H:0000.50
+I:25.125
+J:0.0625
+K:00003.00

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN"
+"http://www.oasis-open.org/docbook/xml/4.0/docbookx.dtd">
+<chapter id="parser">
+  <title>Working with parsed Copybooks</title>
+
+  <para>The <classname>Copybook</classname> class, while primarily used to
+  parse application data, can also be used to build generators or for any
+  other introspective task related to the copybook. It is expected that most
+  users of this package will not need to worry too much about the
+  <classname>Element</classname> types and the classes are designed such that
+  very little interaction with the <classname>Element</classname> types is
+  required.</para>
+
+  <para>The base type for the parse tree is the <classname>Element</classname>
+  class. There are a good number of <classname>Element</classname> types, one
+  for each unique COBOL type. This means that while there is a separate type
+  for BINARY vs. PACKED types, there is no type for COMP vs. BINARY. The
+  different types and how they relate back to the COBOL types is detailed in
+  the JavaDocs for these classes (or will be anyway.)</para>
+
+  <para>Like the <classname>Data</classname> types, the
+  <classname>Element</classname> types are grouped into two major types:
+  <classname>Leaf</classname> and <classname>Group</classname>.
+  <classname>Leaf</classname> elements are associated with values a
+  <classname>Group</classname> types with, well, groups. The element tree will
+  essentially mirror the <classname>Data</classname> tree except that the
+  <classname>Elements</classname> have much more information relating to the
+  actual COBOL types in the copybook definition.</para>
+
+  <para>The basic role of the <classname>Element</classname> types is
+  translating byte input into <classname>Data</classname> instances,
+  validating that data matches the specification in the copybook and writing
+  <classname>Data</classname> objects back to byte format.</para>
+
+  <para>This chapter discusses the base classes and classes that are general
+  to the package. Discussion of each of the <classname>Element</classname>
+  implementations is not included at this time.</para>
+
+  <sect1>
+    <title>CopybookParser</title>
+
+    <para>The <classname>CopybookParser</classname> class is as the name
+    suggests, a parser for copybooks. Currently the
+    <classname>CopybookParser</classname> class requires that each stream
+    parsed contains only one record layout. This is will likely change in the
+    future to support any number of layouts in a single stream. The the
+    <classname>CopybookParser</classname> class takes the COBOL code and
+    produces instances of the <classname>Copybook</classname> class to
+    represent the data structures in the stream.</para>
+  </sect1>
+
+  <sect1>
+    <title>Copybook</title>
+
+    <para>The <classname>CopyBook</classname> class represents a parsed
+    copybook definition. It is a special form of the <classname>Group
+    </classname>class (discussed in a following section.) Every parsed
+    copybook layout has a single copybook element that acts as the root node
+    for the parse tree.</para>
+  </sect1>
+
+  <sect1>
+    <title>Element</title>
+
+    <para>The <classname>Element</classname> class represents a single element
+    in the record. This is generally defined by a PIC clause. The
+    <classname>Element</classname> class is an abstract class. The actual
+    instances are actually specific to the different types in a COBOL data
+    declaration.</para>
+  </sect1>
+
+  <sect1>
+    <title>Group</title>
+
+    <para>The <classname>Group</classname> class is used to represent group
+    types i.e. elements in the copybook that are composed of other elements.
+    This class should be fairly straightforward. It provdes a List of it's
+    children.</para>
+  </sect1>
+
+  <sect1>
+    <title>Leaf</title>
+
+    <para>The <classname>Leaf</classname> class is used to represent value
+    elements i.e. those elements that contain data that is not composed of
+    other elements such as numbers and string character data. A value element
+    can never have child elements.</para>
+  </sect1>
+</chapter>

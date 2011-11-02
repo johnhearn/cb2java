@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
+"http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+
+<book xmlns:xi="http://www.w3.org/2003/XInclude">
+
+  <title>CB2Java</title>
+  <xi:include href="file:///c:/code/copybook/doc/intro.xml"/>
+
+  <xi:include href="file:///c:/code/copybook/doc/data.xml"/>
+
+  <xi:include href="file:///c:/code/copybook/doc/parser.xml"/>
+
+</book>
