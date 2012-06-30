@@ -16,6 +16,9 @@
     <developer>
       <id>dubwai</id>
       <url>http://sourceforge.net/users/dubwai</url>
+      <roles>
+      	<role>developer</role>
+      </roles>
     </developer>
     <developer>
       <id>montoyaedu</id>
@@ -23,5 +26,13 @@
       <url>https://github.com/montoyaedu</url>
     </developer>
   </developers>
+
+  <licenses>
+    <license>
+      <name>GNU GENERAL PUBLIC LICENSE Version 1, February 1989</name>
+      <url>http://www.gnu.org/licenses/gpl-1.0.txt</url>
+      <comments>See ./LICENSE</comments>
+    </license>
+  </licenses>
 
 </project>
