@@ -35,4 +35,9 @@
     </license>
   </licenses>
 
+	<scm>
+		<url>https://github.com/devstopfix/cb2java</url>
+		<connection>scm:git:git://github.com/devstopfix/cb2java.git</connection>
+	</scm>
+
 </project>
