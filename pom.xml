@@ -21,6 +21,14 @@
       </roles>
     </developer>
     <developer>
+      <id>ptrthomas</id>
+      <name>Peter Thomas</name>
+      <url>http://ptrthomas.users.sourceforge.net/</url>
+      <roles>
+        <role>developer</role>
+      </roles>
+    </developer>
+    <developer>
       <id>montoyaedu</id>
       <name>H. Eduardo Montoya Sánchez</name>
       <url>https://github.com/montoyaedu</url>
