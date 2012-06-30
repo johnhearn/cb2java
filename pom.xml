@@ -9,4 +9,19 @@
   <artifactId>cb2java</artifactId>
   <version>1.0</version>
   <url>https://github.com/devstopfix/cb2java</url>
+
+  <description>Library that allows dynamic access to Copybook structures at run-time from a Java application</description>
+
+  <developers>
+    <developer>
+      <id>dubwai</id>
+      <url>http://sourceforge.net/users/dubwai</url>
+    </developer>
+    <developer>
+      <id>montoyaedu</id>
+      <name>H. Eduardo Montoya Sánchez</name>
+      <url>https://github.com/montoyaedu</url>
+    </developer>
+  </developers>
+
 </project>
