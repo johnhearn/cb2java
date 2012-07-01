@@ -52,12 +52,12 @@ Build the JAR file using [Maven](http://maven.apache.org/):
 Include the JAR file in your Java project pom.xml:
 
     <dependency>
-        <groupId>net.sf</groupId>
+        <groupId>net.sf.cb2java</groupId>
         <artifactId>cb2java</artifactId>
         <version>1.0</version>
     </dependency>
 
 or your [Leiningen](https://github.com/technomancy/leiningen) project.clj:
 
-    [net.sf/cb2java "1.0"]
+    [net.sf.cb2java/cb2java "1.0"]
 
