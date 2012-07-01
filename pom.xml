@@ -5,7 +5,7 @@
                       http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>com.devstopfix</groupId>
+  <groupId>net.sf</groupId>
   <artifactId>cb2java</artifactId>
   <version>1.0</version>
   <url>https://github.com/devstopfix/cb2java</url>
