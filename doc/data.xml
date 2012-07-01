@@ -14,7 +14,7 @@
   <classname>InputStream</classname> (or <classname>Reader</classname>) to the
   <methodname>parse</methodname> method. This method also takes a
   <classname>String</classname> for the name. It is recommended that you
-  supply a unique name at this point but it's not important exaclty what you
+  supply a unique name at this point but it's not important exactly what you
   use, just that it's meaningful and hopefully unique. See the <link
   linkend="parser">parser</link> documentation for more detail.</para>
 
