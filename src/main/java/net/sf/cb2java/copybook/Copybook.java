@@ -116,10 +116,10 @@ public class Copybook extends Group implements Settings
         return new Record(getName(), (GroupData) parse(data));
     }
     
-    public List parseData(InputStream stream) throws IOException
+    public List<Record> parseData(InputStream stream) throws IOException
     {
         ByteBuffer buffer = new ByteBuffer(stream);        
-        List list = new ArrayList();
+        List<Record> list = new ArrayList<Record>();
         
         while (buffer.hasNext()) {
             list.add(new Record(getName(), (GroupData) parse(buffer.getNext())));

@@ -4,7 +4,9 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.List;
 import junit.framework.TestCase;
+import net.sf.cb2java.data.Record;
 
 /**
  *
@@ -34,6 +36,7 @@ public class CopybookParserTest extends TestCase {
     public void testWeCanParseCopybookData() throws FileNotFoundException, IOException {
         Copybook copybook = CopybookParser.parse("B", new FileInputStream(new File("./target/test-classes/b.copybook")));
         assertEquals(31, copybook.getLength());
-        copybook.parseData(new FileInputStream(new File("./target/test-classes/b.input.txt")));
+        List<Record> results = copybook.parseData(new FileInputStream(new File("./target/test-classes/b.input.txt")));
+        assertEquals(1, results.size());
     }
 }
