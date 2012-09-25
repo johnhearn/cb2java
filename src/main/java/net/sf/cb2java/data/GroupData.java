@@ -173,7 +173,7 @@ public class GroupData extends Data
             int occurs = child.getDefinition().getOccurs();
             if (occurs > 1) {
                 List childOccurs = new ArrayList(occurs);
-                childOccurs.add(child);
+                childOccurs.add(child.toPOJO());
                 for(int i=1; i<occurs;i++) {
                     childOccurs.add(groupIterator.next().toPOJO());
                 }
