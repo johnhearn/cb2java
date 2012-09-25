@@ -68,9 +68,8 @@ public class CopybookParser
     {        
         Copybook document = null;
         Lexer lexer = null;
-        String preProcessed = null;
         try {
-            preProcessed = CobolPreprocessor.preProcess(reader);
+            String preProcessed = CobolPreprocessor.preProcess(reader);
             StringReader sr = new StringReader(preProcessed);
             PushbackReader pbr = new PushbackReader(sr, 1000);
             
