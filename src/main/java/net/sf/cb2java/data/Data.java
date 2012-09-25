@@ -135,4 +135,19 @@ public abstract class Data
     {
         getDefinition().validate(data);
     }
+    
+    /**
+     * Convert the copybook data types into standard Java structures
+     * and objects.
+     * 
+     * <li>Groups become Maps
+     * <li>Occurs use Lists
+     * <li>PICX become Strings
+     * <li>PIC9 become Integers or BigDecimals
+     * 
+     * @author github.com/devstopfix
+     * 
+     * @return the copybook data as Plain Java Objects
+     */
+    //protected abstract Object toPOJO();
 }

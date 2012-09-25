@@ -18,10 +18,30 @@
  */
 package net.sf.cb2java.data;
 
+import java.util.Map;
+
 public class Record extends GroupData
 {
     public Record(String name, GroupData data)
     {
         super(data.definition, data.children);
     }
+    
+    /**
+     * Convert the copybook data types into standard Java structures
+     * and objects.
+     * 
+     * <li>Groups become Maps
+     * <li>Occurs use Lists
+     * <li>PICX become Strings
+     * <li>PIC9 become Integers or BigDecimals
+     * 
+     * @author github.com/devstopfix
+     * 
+     * @return the copybook data as Plain Java Objects
+     */
+    public Map<String,Object> toMap() {
+        return null;
+    }
+    
 }

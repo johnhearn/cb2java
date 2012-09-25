@@ -60,14 +60,16 @@ public class GroupData extends Data
 //        }
 //    }
     
+    @Override
     public boolean isLeaf()
     {
         return false;
     }
     
     /**
-     * returns a immutable collection of children
+     * returns an immutable collection of children
      */
+    @Override
     public List getChildren()
     {
         return wrapper;
@@ -99,6 +101,7 @@ public class GroupData extends Data
         return toString("");
     }
     
+    @Override
     public String toString(String indent)
     {
         StringBuffer buffer = new StringBuffer(indent);
@@ -125,11 +128,13 @@ public class GroupData extends Data
     /**
      * returns the children of this item
      */
+    @Override
     public Object getValue()
     {
         return getChildren();
     }
 
+    @Override
     public Object translate(String data)
     {
         throw new UnsupportedOperationException("cannot convert string to group");
@@ -138,6 +143,7 @@ public class GroupData extends Data
     /**
      * not supported
      */
+    @Override
     protected void setValueImpl(Object data)
     {
         throw new IllegalArgumentException("operation not yet supported for groups");
