@@ -84,8 +84,8 @@ public class CopybookParserTest extends TestCase {
         Map<String,Object>record = results.get(0).toMap();
         List sub = (List) ((Map)record.get("ROOT")).get("SUB");
         assertEquals(2, sub.size());
-        assertEquals("EEE", ((Data)sub.get(1)).getChildren().get(0).getValue());
-        assertEquals("FFF", ((Data)sub.get(1)).getChildren().get(1).getValue());
+        assertEquals("EEE", ((Map)sub.get(1)).get("E").toString());
+        assertEquals("FFF", ((Map)sub.get(1)).get("F").toString());
         System.out.println(record.toString());
         System.out.println(Arrays.toString(sub.toArray()));
     }

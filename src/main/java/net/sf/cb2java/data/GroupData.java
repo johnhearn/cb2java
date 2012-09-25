@@ -175,7 +175,7 @@ public class GroupData extends Data
                 List childOccurs = new ArrayList(occurs);
                 childOccurs.add(child);
                 for(int i=1; i<occurs;i++) {
-                    childOccurs.add(groupIterator.next());
+                    childOccurs.add(groupIterator.next().toPOJO());
                 }
                 group.put(child.getName(), Collections.unmodifiableList(childOccurs));
             } else {
