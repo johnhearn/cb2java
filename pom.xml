@@ -6,7 +6,6 @@
     <modelVersion>4.0.0</modelVersion>
   
     <name>cb2java</name>
-
     <groupId>net.sf.cb2java</groupId>
     <artifactId>cb2java</artifactId>
     <version>5.0</version>
