@@ -20,16 +20,19 @@ package net.sf.cb2java.data;
 
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import net.sf.cb2java.types.Group;
 
 public class GroupData extends Data
 {
     protected final Group definition;
     protected final List<Data> children;
-    private final List<Data> wrapper;// = new Wrapper();
+    private final List<Data> wrapper;
     
     public GroupData(final Group definition, final List<Data> children)
     {
@@ -70,7 +73,7 @@ public class GroupData extends Data
      * returns an immutable collection of children
      */
     @Override
-    public List getChildren()
+    public List<Data> getChildren()
     {
         return wrapper;
     }
@@ -147,5 +150,39 @@ public class GroupData extends Data
     protected void setValueImpl(Object data)
     {
         throw new IllegalArgumentException("operation not yet supported for groups");
+    }
+
+    /**
+     * Convert the copybook group into a Java Map or List.
+     * 
+     * Single items (occurs == 1) are placed as entries in a <code>Map</code>. 
+     * The Keys of a map are listed in the same order 
+     * as the Copybook definition.
+     * 
+     * Multiple-occurs items are placed inside an immutable <code>List</code>.
+     * 
+     * @author github.com/devstopfix/cb2java
+     * @return the copybook data as a map
+     */
+    @Override
+    protected Object toPOJO() {
+        Map<String, Object> group = new LinkedHashMap<String, Object>(this.wrapper.size());
+        Iterator<Data> groupIterator = wrapper.iterator();
+        while (groupIterator.hasNext()) {
+            Data child = groupIterator.next();
+            int occurs = child.getDefinition().getOccurs();
+            if (occurs > 1) {
+                List childOccurs = new ArrayList(occurs);
+                childOccurs.add(child);
+                for(int i=1; i<occurs;i++) {
+                    childOccurs.add(groupIterator.next());
+                }
+                group.put(child.getName(), Collections.unmodifiableList(childOccurs));
+            } else {
+                group.put(child.getName(), child.toPOJO());
+            }
+        }
+        
+        return group;
     }
 }

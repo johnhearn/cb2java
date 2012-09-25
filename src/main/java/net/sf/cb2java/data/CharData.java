@@ -21,7 +21,7 @@ package net.sf.cb2java.data;
 import net.sf.cb2java.types.Characters;
 
 /**
- * Represents data for alpanumeric data types
+ * Represents data for alpha-numeric data types.
  * 
  * @author James Watson
  */
@@ -36,6 +36,11 @@ public class CharData extends ValueData
 //        this.definition = definition;
     }
     
+    /**
+     * TODO - make this a rightTrim()
+     * 
+     * @return the trimmed String
+     */
     public String getString()
     {
         return data == null ? "" : data.trim();
@@ -74,5 +79,18 @@ public class CharData extends ValueData
     public Object translate(String data)
     {
         return data;
+    }
+
+    /**
+     * Convert the copybook data types into standard Java structures
+     * and objects.
+     * 
+     * @author github.com/devstopfix/cb2java
+     * @return the copybook data as Plain Java Objects
+     */
+    @Override
+    protected Object toPOJO() {
+        // todo make this a right-trim
+        return this.getString();
     }
 }

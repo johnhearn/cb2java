@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import junit.framework.TestCase;
@@ -47,6 +48,7 @@ public class CopybookParserTest extends TestCase {
         assertEquals("BCDE", root.getChildren().get(1).toString());
         // TODO assertEquals(12345, root.getChildren().get(2).toString());
         // TODO assertEquals(1234, ((Data)root.getChildren().get(3)).getValue());
+        System.out.println(root.toString());
     }
     
     /**
@@ -65,4 +67,25 @@ public class CopybookParserTest extends TestCase {
         // TODO assertEquals(12345, root.getChildren().get(2).toString());
         // TODO assertEquals(1234, ((Data)root.getChildren().get(3)).getValue());
     }
+    
+    public void testRightTrimOfPICXfields() throws FileNotFoundException, IOException {
+        Copybook copybook = CopybookParser.parse("B", new FileInputStream(new File("./target/test-classes/b.copybook")));
+        List<Record> results = copybook.parseData(new FileInputStream(new File("./target/test-classes/b.input.txt")));
+        Map<String,Object>record = results.get(0).toMap();
+        
+        // TODO assertEquals(" E", record.get(0).toString());
+        // TODO assertEquals("FF", record.get(1).toString());
+    }
+    
+    public void testOccursAsList() throws FileNotFoundException, IOException {
+        Copybook copybook = CopybookParser.parse("B", new FileInputStream(new File("./target/test-classes/b.copybook")));
+        assertEquals(31, copybook.getLength());
+        List<Record> results = copybook.parseData(new FileInputStream(new File("./target/test-classes/b.input.txt")));
+        Map<String,Object>record = results.get(0).toMap();
+        List sub = (List) ((Map)record.get("ROOT")).get("SUB");
+        assertEquals(2, sub.size());
+        System.out.println(record.toString());
+        System.out.println(Arrays.toString(sub.toArray()));
+    }
+    
 }

@@ -45,7 +45,7 @@ public class FloatingData extends ValueData
      * constructor
      * 
      * @param definition the underlying definition for the
-     * type in the copybook defintion
+     * type in the copybook definition
      */
     public FloatingData(final Floating definition)
     {
@@ -60,6 +60,7 @@ public class FloatingData extends ValueData
         return data == null ? new BigDecimal(0) : data;
     }
     
+    @Override
     public void setValueImpl(Object data)
     {
         setValue((BigDecimal) data, false);
@@ -76,6 +77,7 @@ public class FloatingData extends ValueData
         this.data = data;
     }
     
+    @Override
     public String toString()
     {
         return getValue().toString();
@@ -84,6 +86,7 @@ public class FloatingData extends ValueData
     /**
      * returns the internal data as a BigDecimal
      */
+    @Override
     public Object getValue()
     {
         return getBigDecimal();
@@ -105,8 +108,21 @@ public class FloatingData extends ValueData
         return getBigDecimal().doubleValue();
     }
 
+    @Override
     public Object translate(String data)
     {
         return new BigDecimal(data);
+    }
+
+     /**
+     * Convert the copybook data types into standard Java structures
+     * and objects.
+     * 
+     * @author github.com/devstopfix/cb2java
+     * @return the copybook data as Plain Java Objects
+     */
+    @Override
+    protected Object toPOJO() {
+        return this.getBigDecimal();
     }
 }

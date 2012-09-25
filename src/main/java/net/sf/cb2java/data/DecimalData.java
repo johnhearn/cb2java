@@ -86,4 +86,16 @@ public class DecimalData extends NumericData
     {
         return getBigDecimal();
     }
+
+    /**
+     * Convert the copybook data types into standard Java structures
+     * and objects.
+     * 
+     * @author github.com/devstopfix/cb2java
+     * @return the copybook data as Plain Java Objects
+     */
+   @Override
+    protected Object toPOJO() {
+        return this.getBigDecimal();
+    }
 }

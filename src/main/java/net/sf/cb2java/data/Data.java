@@ -61,7 +61,7 @@ public abstract class Data
     /**
      * returns all the children of this item, if there are any
      */
-    public abstract List getChildren();
+    public abstract List<Data> getChildren();
     
     /**
      * gives a string representation of this element
@@ -145,9 +145,9 @@ public abstract class Data
      * <li>PICX become Strings
      * <li>PIC9 become Integers or BigDecimals
      * 
-     * @author github.com/devstopfix
+     * @author github.com/devstopfix/cb2java
      * 
      * @return the copybook data as Plain Java Objects
      */
-    //protected abstract Object toPOJO();
+    protected abstract Object toPOJO();
 }
