@@ -21,7 +21,6 @@ package net.sf.cb2java.copybook;
 import java.util.Iterator;
 import java.util.List;
 import java.util.StringTokenizer;
-
 import net.sf.cb2java.Values;
 import net.sf.cb2java.types.Element;
 import net.sf.cb2java.types.Group;

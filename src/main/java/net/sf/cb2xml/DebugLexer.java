@@ -9,7 +9,6 @@
 package net.sf.cb2xml;
 
 import java.io.PushbackReader;
-
 import net.sf.cb2xml.sablecc.lexer.Lexer;
 
 /**

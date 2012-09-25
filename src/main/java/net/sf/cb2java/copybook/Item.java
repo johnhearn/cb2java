@@ -20,7 +20,6 @@ package net.sf.cb2java.copybook;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import net.sf.cb2java.Settings;
 import net.sf.cb2java.Value;
 import net.sf.cb2java.Values;

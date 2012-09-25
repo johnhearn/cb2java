@@ -19,7 +19,6 @@
 package net.sf.cb2java.data;
 
 import java.math.BigDecimal;
-
 import net.sf.cb2java.types.Floating;
 
 /**

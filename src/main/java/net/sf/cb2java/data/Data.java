@@ -21,7 +21,6 @@ package net.sf.cb2java.data;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.List;
-
 import net.sf.cb2java.types.Element;
 
 /**

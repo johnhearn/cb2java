@@ -22,7 +22,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
-
 import net.sf.cb2java.Value;
 import net.sf.cb2java.data.Data;
 import net.sf.cb2java.data.GroupData;

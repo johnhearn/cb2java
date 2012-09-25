@@ -19,7 +19,6 @@
 package net.sf.cb2java.types;
 
 import java.util.regex.Pattern;
-
 import net.sf.cb2java.Value;
 
 /** 

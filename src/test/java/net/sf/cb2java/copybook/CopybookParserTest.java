@@ -4,8 +4,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import junit.framework.TestCase;
-import net.sf.cb2java.copybook.Copybook;
-import net.sf.cb2java.copybook.CopybookParser;
 
 /**
  *

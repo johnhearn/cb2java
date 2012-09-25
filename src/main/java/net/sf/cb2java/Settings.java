@@ -19,7 +19,6 @@
 package net.sf.cb2java;
 
 import java.util.Properties;
-
 import net.sf.cb2java.types.Numeric;
 import net.sf.cb2java.types.Numeric.Position;
 

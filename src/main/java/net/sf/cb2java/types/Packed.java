@@ -20,7 +20,6 @@ package net.sf.cb2java.types;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
-
 import net.sf.cb2java.data.Data;
 import net.sf.cb2java.data.DecimalData;
 import net.sf.cb2java.data.IntegerData;
