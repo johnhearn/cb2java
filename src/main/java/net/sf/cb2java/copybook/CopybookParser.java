@@ -44,12 +44,12 @@ public class CopybookParser
     private static boolean debug = false;
     
     /**
-     * Parses a copybook defintion and returns a Copybook instance
+     * Parses a copybook definition and returns a Copybook instance
      * 
      * @param name the name of the copybook.  For future use.
-     * @param stream the copybook definiton's source stream
+     * @param stream the copybook definition's source stream
      * 
-     * @return a copybook instance containg the parse tree for the definition
+     * @return a copybook instance containing the parse tree for the definition
      */
     public static Copybook parse(String name, InputStream stream)
     {        
@@ -57,12 +57,12 @@ public class CopybookParser
     }
     
     /**
-     * Parses a copybook defintion and returns a Copybook instance
+     * Parses a copybook definition and returns a Copybook instance
      * 
      * @param name the name of the copybook.  For future use.
-     * @param reader the copybook definiton's source reader
+     * @param reader the copybook definition's source reader
      * 
-     * @return a copybook instance containg the parse tree for the definition
+     * @return a copybook instance containing the parse tree for the definition
      */
     public static Copybook parse(String name, Reader reader)
     {        
