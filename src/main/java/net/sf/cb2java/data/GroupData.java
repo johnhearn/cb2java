@@ -28,10 +28,10 @@ import net.sf.cb2java.types.Group;
 public class GroupData extends Data
 {
     protected final Group definition;
-    protected final List children;
-    private final List wrapper;// = new Wrapper();
+    protected final List<Data> children;
+    private final List<Data> wrapper;// = new Wrapper();
     
-    public GroupData(final Group definition, final List children)
+    public GroupData(final Group definition, final List<Data> children)
     {
         super(definition);
         this.definition = definition;

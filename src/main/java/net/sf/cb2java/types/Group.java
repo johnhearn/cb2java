@@ -32,9 +32,9 @@ import net.sf.cb2java.data.GroupData;
 public class Group extends Element
 {
     /** the list of children */
-    private final List children = new ArrayList();
+    private final List<Element> children = new ArrayList();
     /** the wrapper list exposed through getChildren() */
-    private final List wrapper = Collections.unmodifiableList(children);
+    private final List<Element> wrapper = Collections.unmodifiableList(children);
     
     public Group(final String name, final int level, final int occurs)
     {
@@ -50,11 +50,13 @@ public class Group extends Element
     /**
      * returns an immutable list of the children in this group.
      */
-    public List getChildren()
+    @Override
+    public List<Element> getChildren()
     {
         return wrapper;
     }
 
+    @Override
     public int getLength()
     {
         int length = 0;
@@ -85,7 +87,7 @@ public class Group extends Element
 
     public Data create()
     {
-        ArrayList dataChildren = new ArrayList();
+        ArrayList<Data> dataChildren = new ArrayList<Data>();
         
         for (Iterator i = children.iterator(); i.hasNext();) {
             Element element = (Element) i.next();
