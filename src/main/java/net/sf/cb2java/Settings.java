@@ -61,7 +61,7 @@ public interface Settings
                 getSetting("default-sign-position", "trailing", props)) ? Numeric.LEADING : Numeric.TRAILING;
         }
         
-        private static final String getSetting(String name, String defaultValue, Properties props)
+        private static String getSetting(String name, String defaultValue, Properties props)
         {
             try {
                 String value = System.getProperty("cb2java." + name, defaultValue);

@@ -21,8 +21,8 @@ package net.sf.cb2java.types;
 import java.math.BigDecimal;
 import net.sf.cb2java.Value;
 import net.sf.cb2java.copybook.floating.Conversion;
-import net.sf.cb2java.copybook.floating.IEEE754;
 import net.sf.cb2java.copybook.floating.Conversion.Precision;
+import net.sf.cb2java.copybook.floating.IEEE754;
 import net.sf.cb2java.data.Data;
 import net.sf.cb2java.data.FloatingData;
 
