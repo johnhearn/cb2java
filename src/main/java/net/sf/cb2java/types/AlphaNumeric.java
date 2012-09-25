@@ -55,6 +55,7 @@ public class AlphaNumeric extends Characters
         this("", 0, 1, pattern);
     }
     
+    @Override
     public int getLength()
     {
         return length;
@@ -111,6 +112,7 @@ public class AlphaNumeric extends Characters
         return pattern;
     }
     
+    @Override
     public void validate(Object data)
     {
         if (data == null) return;

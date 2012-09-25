@@ -74,6 +74,7 @@ public class Characters extends Leaf
         return getValue().fill(output, getLength(), Value.RIGHT);
     }
 
+    @Override
     public Value getValue()
     {
         return super.getValue() == null ? getSettings().getValues().SPACES : super.getValue();

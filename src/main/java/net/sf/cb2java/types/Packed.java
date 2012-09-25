@@ -81,6 +81,7 @@ public class Packed extends Numeric
         return (digits / 2) + 1;
     }
 
+    @Override
     public int getLength()
     {
         return length;

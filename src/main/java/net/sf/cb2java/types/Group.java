@@ -69,6 +69,7 @@ public class Group extends Element
         return length;
     }
     
+    @Override
     public String toString()
     {
         StringBuffer buffer = new StringBuffer();
@@ -144,11 +145,13 @@ public class Group extends Element
         throw new IllegalArgumentException("groups do not accept data");
     }
 
+    @Override
     public void setValue(Value value)
     {
         throw new RuntimeException("groups cannot have a value");
     }
     
+    @Override
     public Value getValue()
     {
         throw new RuntimeException("groups cannot have a value");

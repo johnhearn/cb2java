@@ -220,6 +220,7 @@ public abstract class Numeric extends Leaf
         }
     }
     
+    @Override
     public Value getValue()
     {
         return super.getValue() == null ? getSettings().getValues().ZEROS : super.getValue();

@@ -69,6 +69,7 @@ public class Floating extends Leaf
         this.conversion = conversion;
     }
 
+    @Override
     public Value getValue()
     {
         return super.getValue() == null ? getSettings().getValues().ZEROS : super.getValue();

@@ -93,6 +93,7 @@ public class GroupData extends Data
         return null;
     }
     
+    @Override
     public String toString()
     {
         return toString("");
@@ -112,6 +113,7 @@ public class GroupData extends Data
         return buffer.toString();
     }
     
+    @Override
     public void write(OutputStream stream) throws IOException
     {
         for (Iterator i = wrapper.iterator(); i.hasNext();) {

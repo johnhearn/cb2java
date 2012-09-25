@@ -262,6 +262,7 @@ public abstract class Element
         }
     }
     
+    @Override
     public String toString() 
     {
         return new String(getSettings().getValues().SPACES.fill(level)) + name + ": '" 
