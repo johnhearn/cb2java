@@ -25,6 +25,9 @@ one element. With CB2Java, one Java module can use two different copybooks
 by merely changing the copybook instance. With a generated approach, you
 need two sets of generated classes.
 
+__Copyright (C) 2006 James Watson__
+
+
 History
 -------
 
@@ -61,3 +64,20 @@ or your [Leiningen](https://github.com/technomancy/leiningen) project.clj:
 
     [net.sf.cb2java/cb2java "1.0"]
 
+
+Licence
+=======
+
+_This program is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation; either version 1, or (at your option)
+any later version._
+
+_This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details._
+
+_You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA._
