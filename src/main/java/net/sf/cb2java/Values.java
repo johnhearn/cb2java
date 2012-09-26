@@ -22,12 +22,10 @@ import java.io.UnsupportedEncodingException;
 
 public class Values
 {
-//    Copybook copybook;
     protected String encoding;
     
     public Values()
     {
-        /* */
     }
     
     public void setEncoding(String encoding)
@@ -53,6 +51,7 @@ public class Values
             this.value = value;
         }
 
+        @Override
         public byte[] get(int length)
         {
             String s = value.length() > length ? value.substring(0, length) : value;

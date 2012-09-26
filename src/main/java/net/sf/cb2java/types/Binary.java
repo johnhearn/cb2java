@@ -20,7 +20,6 @@ package net.sf.cb2java.types;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
-
 import net.sf.cb2java.Value;
 import net.sf.cb2java.data.Data;
 import net.sf.cb2java.data.DecimalData;
@@ -84,6 +83,7 @@ public class Binary extends Numeric
         }
     }
     
+    @Override
     public int getLength()
     {
         return length;
@@ -194,6 +194,7 @@ public class Binary extends Numeric
             super("", length, decimalPlaces, signed);
         }
         
+        @Override
         public byte[] toBytes(Object data)
         {
             byte[] bytes = super.toBytes(data);
@@ -201,6 +202,7 @@ public class Binary extends Numeric
             return getSettings().getLittleEndian() ? reverse(bytes) : bytes;
         }
         
+        @Override
         public Data parse(byte[] input)
         {
             return super.parse(getSettings().getLittleEndian() ? reverse(input) : input);

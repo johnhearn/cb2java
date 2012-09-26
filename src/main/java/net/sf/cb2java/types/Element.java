@@ -22,7 +22,6 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
 import java.util.List;
-
 import net.sf.cb2java.Settings;
 import net.sf.cb2java.Value;
 import net.sf.cb2java.data.Data;
@@ -263,6 +262,7 @@ public abstract class Element
         }
     }
     
+    @Override
     public String toString() 
     {
         return new String(getSettings().getValues().SPACES.fill(level)) + name + ": '" 

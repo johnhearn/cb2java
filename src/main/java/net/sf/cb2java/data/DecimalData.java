@@ -19,7 +19,6 @@
 package net.sf.cb2java.data;
 
 import java.math.BigDecimal;
-
 import net.sf.cb2java.types.Numeric;
 
 public class DecimalData extends NumericData
@@ -86,5 +85,17 @@ public class DecimalData extends NumericData
     public Object getValue()
     {
         return getBigDecimal();
+    }
+
+    /**
+     * Convert the copybook data types into standard Java structures
+     * and objects.
+     * 
+     * @author github.com/devstopfix/cb2java
+     * @return the copybook data as Plain Java Objects
+     */
+   @Override
+    protected Object toPOJO() {
+        return this.getBigDecimal();
     }
 }

@@ -24,7 +24,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import net.sf.cb2java.Settings;
 import net.sf.cb2java.Values;
 import net.sf.cb2java.data.GroupData;
@@ -117,10 +116,10 @@ public class Copybook extends Group implements Settings
         return new Record(getName(), (GroupData) parse(data));
     }
     
-    public List parseData(InputStream stream) throws IOException
+    public List<Record> parseData(InputStream stream) throws IOException
     {
         ByteBuffer buffer = new ByteBuffer(stream);        
-        List list = new ArrayList();
+        List<Record> list = new ArrayList<Record>();
         
         while (buffer.hasNext()) {
             list.add(new Record(getName(), (GroupData) parse(buffer.getNext())));
@@ -188,7 +187,6 @@ public class Copybook extends Group implements Settings
     public class ByteBuffer
     {
         // TODO allow strings, length delimiting
-//        private static final char DELIMITER = '\n';
         private int position = 0;
         private byte[] internal = new byte[1024];
         private int size = 0;

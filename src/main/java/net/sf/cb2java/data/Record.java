@@ -18,10 +18,37 @@
  */
 package net.sf.cb2java.data;
 
+import java.util.LinkedHashMap;
+import java.util.Map;
+
 public class Record extends GroupData
 {
     public Record(String name, GroupData data)
     {
         super(data.definition, data.children);
     }
+    
+    /**
+     * Convert the copybook data types into standard Java structures
+     * and objects.
+     * 
+     * <li>Groups become Maps with keys ordered by the Copybook definition
+     * <li>Occurs use Lists
+     * <li>PICX become Strings
+     * <li>PIC9 become Integers or BigDecimals
+     * 
+     * The result should be considered immutable, any modifications made
+     * are no applied to the parent <code>Record</code>.
+     * 
+     * @author github.com/devstopfix/cb2java
+     * @return the copybook data as Plain Java Objects
+     */
+    public Map<String,Object> toMap() {
+        Map<String, Object> group = new LinkedHashMap<String, Object>(getChildren().size());
+        for(Data child: getChildren()) {
+            group.put(child.getName(), child.toPOJO());
+        }
+        return group;
+    }
+    
 }
