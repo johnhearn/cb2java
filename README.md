@@ -25,7 +25,7 @@ one element. With CB2Java, one Java module can use two different copybooks
 by merely changing the copybook instance. With a generated approach, you
 need two sets of generated classes.
 
-__Copyright (C) 2006 James Watson__
+__Copyright &copy; 2006 James Watson__
 
 
 History
