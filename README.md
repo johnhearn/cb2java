@@ -31,13 +31,15 @@ __Copyright &copy; 2006 James Watson__
 History
 -------
 
-initial fork of project https://sourceforge.net/projects/cb2java/ by dubwai (https://sourceforge.net/users/dubwai)
+Initial fork of project https://sourceforge.net/projects/cb2java/ by dubwai (https://sourceforge.net/users/dubwai)
 - added LICENSE file
 - added LICENSE header to all sources
 
-forked again at https://github.com/devstopfix/cb2java
-- conversion into a self-contained Maven project
+Forked again at https://github.com/devstopfix/cb2java
+- conversion into a self-contained Maven project (v1.0)
 - copied the classes required from http://cb2xml.sourceforge.net/
+- converted source code to Java 5 and added types to collections (v5.0)
+
 
 Documentation
 =============
@@ -57,12 +59,12 @@ Include the JAR file in your Java project pom.xml:
     <dependency>
         <groupId>net.sf.cb2java</groupId>
         <artifactId>cb2java</artifactId>
-        <version>1.0</version>
+        <version>5.3</version>
     </dependency>
 
 or your [Leiningen](https://github.com/technomancy/leiningen) project.clj:
 
-    [net.sf.cb2java/cb2java "1.0"]
+    [net.sf.cb2java/cb2java "5.3"]
 
 
 Licence
