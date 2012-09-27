@@ -1,0 +1,12 @@
+      10 TYPES.
+          20 ALPHA.
+            30 SHORTEST   PIC X(1).
+            30 LONGER     PIC X(10).
+          20 INTEGERS.
+            30 ZEROH      PIC 9(1).
+            30 ONE             PIC 9(1).
+            30 NINE            PIC 9(1).
+            30 TWELVE          PIC 9(2).
+            *30 MINUSONE        PIC S9(2).
+            *30 MINUSSIXTYFIVE  PIC S9(3).
+            *30 MINUSEIGHTYTWO  PIC S9(4).
