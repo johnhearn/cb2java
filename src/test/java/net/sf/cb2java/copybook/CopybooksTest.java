@@ -36,7 +36,7 @@ public class CopybooksTest extends TestCase {
                 return filename.endsWith(".copybook");
             }
         }));
-        assertEquals(2, copybooks.size());
+        assertEquals(3, copybooks.size());
         assertTrue(copybooks.containsKey("a"));
         assertTrue(copybooks.containsKey("b"));
     }
