@@ -23,7 +23,6 @@ import java.io.InputStreamReader;
 import java.io.PushbackReader;
 import java.io.Reader;
 import java.io.StringReader;
-
 import net.sf.cb2xml.DebugLexer;
 import net.sf.cb2xml.sablecc.lexer.Lexer;
 import net.sf.cb2xml.sablecc.node.Start;
@@ -45,12 +44,12 @@ public class CopybookParser
     private static boolean debug = false;
     
     /**
-     * Parses a copybook defintion and returns a Copybook instance
+     * Parses a copybook definition and returns a Copybook instance
      * 
      * @param name the name of the copybook.  For future use.
-     * @param stream the copybook definiton's source stream
+     * @param stream the copybook definition's source stream
      * 
-     * @return a copybook instance containg the parse tree for the definition
+     * @return a copybook instance containing the parse tree for the definition
      */
     public static Copybook parse(String name, InputStream stream)
     {        
@@ -58,20 +57,19 @@ public class CopybookParser
     }
     
     /**
-     * Parses a copybook defintion and returns a Copybook instance
+     * Parses a copybook definition and returns a Copybook instance
      * 
      * @param name the name of the copybook.  For future use.
-     * @param reader the copybook definiton's source reader
+     * @param reader the copybook definition's source reader
      * 
-     * @return a copybook instance containg the parse tree for the definition
+     * @return a copybook instance containing the parse tree for the definition
      */
     public static Copybook parse(String name, Reader reader)
     {        
         Copybook document = null;
         Lexer lexer = null;
-        String preProcessed = null;
         try {
-            preProcessed = CobolPreprocessor.preProcess(reader);
+            String preProcessed = CobolPreprocessor.preProcess(reader);
             StringReader sr = new StringReader(preProcessed);
             PushbackReader pbr = new PushbackReader(sr, 1000);
             

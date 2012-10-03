@@ -21,7 +21,6 @@ package net.sf.cb2java.types;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.text.DecimalFormat;
-
 import net.sf.cb2java.Value;
 import net.sf.cb2java.data.Data;
 import net.sf.cb2java.data.DecimalData;
@@ -228,6 +227,7 @@ public abstract class Numeric extends Leaf
         }
     }
     
+    @Override
     public Value getValue()
     {
         return super.getValue() == null ? getSettings().getValues().ZEROS : super.getValue();

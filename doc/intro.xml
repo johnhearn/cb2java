@@ -6,9 +6,9 @@
 
   <para>The CB2Java project's goal is to simplify the lives of developers
   (e.g. the author) charged with writing Java applications that communicate
-  with COBOL applications. The main motivation for wiriting this library was
+  with COBOL applications. The main motivation for writing this library was
   that in the limited number of available (free) libraries, none had been
-  designed around a dynamic approach. While it may seem strage to write about
+  designed around a dynamic approach. While it may seem strange to write about
   dynamic approaches in Java as it is a statically typed, compiled language
   but it solves a lot of issues that arise in a enterprise environment where
   almost nothing stays the same for very long.</para>
@@ -34,13 +34,13 @@
   need two sets of generated classes.</para>
 
   <para>There are a lot of other ways that a generated approach provides
-  benefits that cannotbe realized effectively with a generated approach. As
+  benefits that cannot be realized effectively with a generated approach. As
   time permits, this documentation will detail more such techniques.</para>
 
   <para>The Cb2Java is meant to be simple to use and limit the amount of
   esoteric knowledge needed to make use of it. COBOL is esoteric enough, there
   is no need to add make it more painful. As such, the documentation here is
-  terse. As time permits it will be expaneded to contain more detailed
+  terse. As time permits it will be expanded to contain more detailed
   information but the beginning sections will remain focused on getting
-  started and making use of the tool rapdily.</para>
+  started and making use of the tool rapidly.</para>
 </chapter>

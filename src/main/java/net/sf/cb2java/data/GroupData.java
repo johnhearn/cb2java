@@ -20,19 +20,21 @@ package net.sf.cb2java.data;
 
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.List;
-
+import java.util.Map;
 import net.sf.cb2java.types.Group;
 
 public class GroupData extends Data
 {
     protected final Group definition;
-    protected final List children;
-    private final List wrapper;// = new Wrapper();
+    protected final List<Data> children;
+    private final List<Data> wrapper;
     
-    public GroupData(final Group definition, final List children)
+    public GroupData(final Group definition, final List<Data> children)
     {
         super(definition);
         this.definition = definition;
@@ -61,15 +63,17 @@ public class GroupData extends Data
 //        }
 //    }
     
+    @Override
     public boolean isLeaf()
     {
         return false;
     }
     
     /**
-     * returns a immutable collection of children
+     * returns an immutable collection of children
      */
-    public List getChildren()
+    @Override
+    public List<Data> getChildren()
     {
         return wrapper;
     }
@@ -94,11 +98,13 @@ public class GroupData extends Data
         return null;
     }
     
+    @Override
     public String toString()
     {
         return toString("");
     }
     
+    @Override
     public String toString(String indent)
     {
         StringBuffer buffer = new StringBuffer(indent);
@@ -113,6 +119,7 @@ public class GroupData extends Data
         return buffer.toString();
     }
     
+    @Override
     public void write(OutputStream stream) throws IOException
     {
         for (Iterator i = wrapper.iterator(); i.hasNext();) {
@@ -124,11 +131,13 @@ public class GroupData extends Data
     /**
      * returns the children of this item
      */
+    @Override
     public Object getValue()
     {
         return getChildren();
     }
 
+    @Override
     public Object translate(String data)
     {
         throw new UnsupportedOperationException("cannot convert string to group");
@@ -137,8 +146,43 @@ public class GroupData extends Data
     /**
      * not supported
      */
+    @Override
     protected void setValueImpl(Object data)
     {
         throw new IllegalArgumentException("operation not yet supported for groups");
+    }
+
+    /**
+     * Convert the copybook group into a Java Map or List.
+     * 
+     * Single items (occurs == 1) are placed as entries in a <code>Map</code>. 
+     * The Keys of a map are listed in the same order 
+     * as the Copybook definition.
+     * 
+     * Multiple-occurs items are placed inside an immutable <code>List</code>.
+     * 
+     * @author github.com/devstopfix/cb2java
+     * @return the copybook data as a map
+     */
+    @Override
+    protected Object toPOJO() {
+        Map<String, Object> group = new LinkedHashMap<String, Object>(this.wrapper.size());
+        Iterator<Data> groupIterator = wrapper.iterator();
+        while (groupIterator.hasNext()) {
+            Data child = groupIterator.next();
+            int occurs = child.getDefinition().getOccurs();
+            if (occurs > 1) {
+                List childOccurs = new ArrayList(occurs);
+                childOccurs.add(child.toPOJO());
+                for(int i=1; i<occurs;i++) {
+                    childOccurs.add(groupIterator.next().toPOJO());
+                }
+                group.put(child.getName(), Collections.unmodifiableList(childOccurs));
+            } else {
+                group.put(child.getName(), child.toPOJO());
+            }
+        }
+        
+        return group;
     }
 }

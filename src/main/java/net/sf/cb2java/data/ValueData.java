@@ -20,7 +20,6 @@ package net.sf.cb2java.data;
 
 import java.util.Collections;
 import java.util.List;
-
 import net.sf.cb2java.types.Element;
 
 public abstract class ValueData extends Data
@@ -40,6 +39,7 @@ public abstract class ValueData extends Data
         return Collections.EMPTY_LIST;
     }
    
+    @Override
     public abstract String toString();
    
     public String toString(String indent)
