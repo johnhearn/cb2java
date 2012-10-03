@@ -4,7 +4,6 @@
   <artifactId>cb2java</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <build>
-    <sourceDirectory>src</sourceDirectory>
     <plugins>
       <plugin>
         <artifactId>maven-compiler-plugin</artifactId>
@@ -18,7 +17,7 @@
   </build>
   <dependencies>
   <dependency>
-  	<groupId>cb2xml</groupId>
+  	<groupId>net.sf.cb2xml</groupId>
   	<artifactId>cb2xml</artifactId>
   	<version>0.0.1-SNAPSHOT</version>
   </dependency>
