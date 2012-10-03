@@ -1,0 +1,10 @@
+# https://github.com/github/gitignore/blob/master/Maven.gitignore
+target/
+
+
+# https://github.com/github/gitignore/blob/master/Global/OSX.gitignore
+.DS_Store
+
+/.classpath
+/.project
+/.settings
