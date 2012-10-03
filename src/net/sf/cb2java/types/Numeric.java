@@ -42,11 +42,12 @@ public abstract class Numeric extends Leaf
     private final int length;
     private final int decimalPlaces;
     private final boolean signed;
+    private String picture;
     
     protected Numeric(String name, int level, int occurs, final String picture)
     {
         super(name, level, occurs);
-        
+        this.setPicture(picture);
         this.length = getLength(picture);
         this.decimalPlaces = getScale(picture, length);
         this.signed = isSigned(picture);
@@ -95,7 +96,7 @@ public abstract class Numeric extends Leaf
         for (int i = 0; i < pic.length(); i++) {
             char c = pic.charAt(i);
             
-            if (c == '9' && (i == pic.length() - 1 || pic.charAt(i + 1) != '(')) {
+            if (c == 'S' || c == '9' && (i == pic.length() - 1 || pic.charAt(i + 1) != '(')) {
                 length++;
             } else if (c == '(') {
                 int pos = pic.indexOf(')', i);
@@ -113,17 +114,23 @@ public abstract class Numeric extends Leaf
         int position = 0;
         pic = pic.toUpperCase();
         
-        for (int i = 0; i < pic.length(); i++) {
-            char c = pic.charAt(i);
-            
-            if (c == '(') {
-                int pos = pic.indexOf(')', i);
-                int times = Integer.parseInt(pic.substring(i + 1, pos));
-                i = pos;
-                position += times;
-            } else if (c == 'V') {
-                return length - position;
+        if (pic.matches("[0-9]+\\([0-9]+\\)(V)[0-9]+"))
+        {
+            for (int i = 0; i < pic.length(); i++) {
+                char c = pic.charAt(i);
+                if (c == '(') {
+                    int pos = pic.indexOf(')', i);
+                    int times = Integer.parseInt(pic.substring(i + 1, pos));
+                    i = pos;
+                    position += times;
+                } else if (c == 'V') {
+                    return length - position;
+                }
             }
+        }
+        else if (pic.matches("[0-9]+(V)[0-9]+"))
+        {
+        	return length - pic.indexOf('V');
         }
         
         return 0;
@@ -261,7 +268,15 @@ public abstract class Numeric extends Leaf
             + (cause == null ? "" : " " + cause.getMessage()));
     }
     
-    public static class Position
+    public void setPicture(String picture) {
+		this.picture = picture;
+	}
+
+	public String getPicture() {
+		return picture;
+	}
+
+	public static class Position
     {
         private Position(){}
     }
