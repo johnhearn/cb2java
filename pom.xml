@@ -9,7 +9,7 @@
     <groupId>net.sf.cb2java</groupId>
     <artifactId>cb2java</artifactId>
     <version>5.3</version>
-    <url>https://github.com/devstopfix/cb2java</url>
+    <url>https://github.com/montoyaedu/cb2java</url>
 
     <description>Library that allows dynamic access to Copybook structures at run-time from a Java application</description>
 
@@ -33,6 +33,9 @@
             <id>montoyaedu</id>
             <name>H. Eduardo Montoya Sánchez</name>
             <url>https://github.com/montoyaedu</url>
+            <roles>
+                <role>developer</role>
+            </roles>
         </developer>
     </developers>
 
@@ -45,8 +48,8 @@
     </licenses>
 
     <scm>
-        <url>https://github.com/devstopfix/cb2java</url>
-        <connection>scm:git:git://github.com/devstopfix/cb2java.git</connection>
+        <url>https://github.com/montoyaedu/cb2java</url>
+        <connection>scm:git:git://github.com/montoyaedu/cb2java.git</connection>
     </scm>
 
     <build>

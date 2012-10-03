@@ -94,8 +94,11 @@ public abstract class Numeric extends Leaf
         
         for (int i = 0; i < pic.length(); i++) {
             char c = pic.charAt(i);
-            
-            if (c == 'S' || c == '9' && (i == pic.length() - 1 || pic.charAt(i + 1) != '(')) {
+            /**
+             * I don't remember why i added 'S' to length calculation...
+             * but this breaks tests :(
+             */
+            if (/*c == 'S' ||*/ c == '9' && (i == pic.length() - 1 || pic.charAt(i + 1) != '(')) {
                 length++;
             } else if (c == '(') {
                 int pos = pic.indexOf(')', i);
