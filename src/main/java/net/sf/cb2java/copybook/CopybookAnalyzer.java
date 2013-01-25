@@ -79,7 +79,7 @@ import net.sf.cb2xml.sablecc.parser.Parser;
  */
 class CopybookAnalyzer extends DepthFirstAdapter
 {
-    Values values = new Values();
+    final Values values = new Values();
     
     private Parser parser;
     private Item document;
