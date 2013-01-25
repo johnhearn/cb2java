@@ -32,7 +32,7 @@ import net.sf.cb2java.data.GroupData;
 public class Group extends Element
 {
     /** the list of children */
-    private final List<Element> children = new ArrayList();
+    private final List<Element> children = new ArrayList<Element>();
     /** the wrapper list exposed through getChildren() */
     private final List<Element> wrapper = Collections.unmodifiableList(children);
     
@@ -61,7 +61,7 @@ public class Group extends Element
     {
         int length = 0;
         
-        for (Iterator i = children.iterator(); i.hasNext();) {
+        for (Iterator<Element> i = children.iterator(); i.hasNext();) {
             Element element = (Element) i.next();
             for (int j = 0; j < element.getOccurs(); j++) {
                 length += element.getLength();
@@ -78,7 +78,7 @@ public class Group extends Element
         
         buffer.append(super.toString());
         
-        for (Iterator i = children.iterator(); i.hasNext();) {
+        for (Iterator<Element> i = children.iterator(); i.hasNext();) {
             buffer.append(i.next());
         }
         
@@ -89,7 +89,7 @@ public class Group extends Element
     {
         ArrayList<Data> dataChildren = new ArrayList<Data>();
         
-        for (Iterator i = children.iterator(); i.hasNext();) {
+        for (Iterator<Element> i = children.iterator(); i.hasNext();) {
             Element element = (Element) i.next();
             for (int j = 0; j < element.getOccurs(); j++) {
                 dataChildren.add(element.create());
@@ -101,11 +101,11 @@ public class Group extends Element
     
     public Data parse(final byte[] bytes)
     {
-        ArrayList dataChildren = new ArrayList();
+        ArrayList<Data> dataChildren = new ArrayList<Data>();
         
         int pos = 0;
         
-        for (Iterator i = children.iterator(); i.hasNext();) {
+        for (Iterator<Element> i = children.iterator(); i.hasNext();) {
             final Element element = (Element) i.next();
             for (int j = 0; j < element.getOccurs(); j++) {
 //                final int p = pos;

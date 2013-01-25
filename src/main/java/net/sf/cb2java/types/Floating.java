@@ -47,7 +47,7 @@ public class Floating extends Leaf
         Conversion temp;
         
         try {
-            Class clazz = Class.forName(getSettings().getFloatConversion());
+            Class<?> clazz = Class.forName(getSettings().getFloatConversion());
             temp = (Conversion) clazz.newInstance();
         } catch (Exception e) {
             temp = new IEEE754();

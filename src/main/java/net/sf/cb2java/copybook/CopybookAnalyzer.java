@@ -129,7 +129,7 @@ class CopybookAnalyzer extends DepthFirstAdapter
     {
         item.getElement().setSettings((Copybook) document.getElement());
         
-        for (Iterator i = item.children.iterator(); i.hasNext();) {
+        for (Iterator<?> i = item.children.iterator(); i.hasNext();) {
             Item child = (Item) i.next();
             
             if (child.redefines != null) {
@@ -157,9 +157,9 @@ class CopybookAnalyzer extends DepthFirstAdapter
 	
 	public void checkForComments(Token node)
     {
-		List list = (List) parser.ignoredTokens.getIn(node);
+		List<?> list = (List<?>) parser.ignoredTokens.getIn(node);
 		if (list != null) {
-			Iterator i = list.iterator();
+			Iterator<?> i = list.iterator();
 			while (i.hasNext()) {
 				String s = i.next().toString().trim();
 				if (s.length() > 1) {
@@ -435,9 +435,9 @@ class CopybookAnalyzer extends DepthFirstAdapter
 
     int getPosition(String name) 
     {        
-        List children = document.getElement().getChildren();
+    	List<Element> children = document.getElement().getChildren();
         
-        for (Iterator i = children.iterator(); i.hasNext();) {
+        for (Iterator<Element> i = children.iterator(); i.hasNext();) {
             Element testElement = (Element) i.next();
             if (testElement.getName().equals(name)) {
                 return testElement.getPosition();
