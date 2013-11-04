@@ -116,7 +116,7 @@ public abstract class Numeric extends Leaf
         int position = 0;
         pic = pic.toUpperCase();
         
-        if (pic.matches("[0-9]+\\([0-9]+\\)(V)[0-9]+"))
+        if (pic.matches("S?[0-9]+\\([0-9]+\\)(V)[0-9]+"))
         {
             for (int i = 0; i < pic.length(); i++) {
                 char c = pic.charAt(i);
@@ -130,7 +130,7 @@ public abstract class Numeric extends Leaf
                 }
             }
         }
-        else if (pic.matches("[0-9]+(V)[0-9]+"))
+        else if (pic.matches("S?[0-9]+(V)[0-9]+"))
         {
         	return length - pic.indexOf('V');
         }
