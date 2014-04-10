@@ -48,9 +48,9 @@ public interface Settings
             Properties props = new Properties();
             
             try {
-                props.load(ClassLoader.getSystemResourceAsStream("copybook.props"));
+                props.load(Settings.class.getResourceAsStream("/copybook.props"));
             } catch (Exception e) {
-                // TODO logging
+                System.out.println("Could not load 'copybook.props' file, reverting to defaults." + e);
             }  
             
             DEFAULT_ENCODING = getSetting("encoding", System.getProperty("file.encoding"), props);
@@ -65,17 +65,7 @@ public interface Settings
         {
             try {
                 String value = System.getProperty("cb2java." + name, defaultValue);
-                
-                try {
-                    try {
-                        value = props.getProperty("encoding", value);
-                    } catch (Exception e) {
-                        // TODO logging
-                    }
-                } catch (Exception e) {
-                    // TODO logging
-                }
-                
+                value = props.getProperty(name, value);
                 return value;
             } catch (Exception e) {
                 return defaultValue;
