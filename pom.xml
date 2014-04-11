@@ -53,18 +53,21 @@
     </scm>
 
     <build>
-        <resources>
-            <!-- data files required to parse copybooks -->
-            <resource>
-                <directory>src/main/java</directory>
-                <includes>
-                    <include>**/lexer.dat</include>
-                    <include>**/parser.dat</include>
-                </includes>
-            </resource>
-        </resources>
-        <plugins>
-            <plugin>
+		<plugins>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>sablecc-maven-plugin</artifactId>
+				<version>2.2</version>
+				<executions>
+					<execution>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>generate</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>2.3.2</version>
@@ -82,11 +85,6 @@
             <artifactId>junit</artifactId>
             <version>3.8.1</version>
             <scope>test</scope>
-        </dependency>
-        <dependency>
-        	<groupId>net.sf.cb2xml</groupId>
-        	<artifactId>cb2xml</artifactId>
-        	<version>0.0.1-SNAPSHOT</version>
         </dependency>
     </dependencies>
 

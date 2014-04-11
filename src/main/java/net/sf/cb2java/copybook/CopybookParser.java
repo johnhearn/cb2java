@@ -23,7 +23,7 @@ import java.io.InputStreamReader;
 import java.io.PushbackReader;
 import java.io.Reader;
 import java.io.StringReader;
-import net.sf.cb2xml.DebugLexer;
+import net.sf.cb2java.copybook.DebugLexer;
 import net.sf.cb2xml.sablecc.lexer.Lexer;
 import net.sf.cb2xml.sablecc.node.Start;
 import net.sf.cb2xml.sablecc.parser.Parser;
