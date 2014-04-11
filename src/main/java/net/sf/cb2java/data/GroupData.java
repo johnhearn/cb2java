@@ -88,7 +88,7 @@ public class GroupData extends Data
      */
     public Data getChild(String name)
     {
-        for (Iterator i = wrapper.iterator(); i.hasNext();)
+        for (Iterator<Data> i = wrapper.iterator(); i.hasNext();)
         {
             Data child = (Data) i.next();
             
@@ -111,7 +111,7 @@ public class GroupData extends Data
         
         buffer.append(getName());
         
-        for (Iterator i = wrapper.iterator(); i.hasNext();) {
+        for (Iterator<Data> i = wrapper.iterator(); i.hasNext();) {
             buffer.append('\n');
             buffer.append(((Data) i.next()).toString(indent + INDENT));
         }
@@ -122,7 +122,7 @@ public class GroupData extends Data
     @Override
     public void write(OutputStream stream) throws IOException
     {
-        for (Iterator i = wrapper.iterator(); i.hasNext();) {
+        for (Iterator<Data> i = wrapper.iterator(); i.hasNext();) {
             Data child = (Data) i.next();
             child.write(stream);
         }
@@ -172,7 +172,7 @@ public class GroupData extends Data
             Data child = groupIterator.next();
             int occurs = child.getDefinition().getOccurs();
             if (occurs > 1) {
-                List childOccurs = new ArrayList(occurs);
+                List<Object> childOccurs = new ArrayList<Object>(occurs);
                 childOccurs.add(child.toPOJO());
                 for(int i=1; i<occurs;i++) {
                     childOccurs.add(groupIterator.next().toPOJO());

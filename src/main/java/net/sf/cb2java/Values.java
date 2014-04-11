@@ -22,7 +22,7 @@ import java.io.UnsupportedEncodingException;
 
 public class Values
 {
-    protected String encoding;
+    private String encoding;
     
     public Values()
     {
@@ -41,13 +41,17 @@ public class Values
         }
     }
     
+    protected String getEncoding() {
+		return encoding;
+	}
+    
     public class Literal extends Value
     {
         private final String value;
         
         public Literal(final String value)
         {
-            super(encoding);
+            super(Values.this);
             this.value = value;
         }
 
@@ -73,7 +77,7 @@ public class Values
     {
         public StringBasedValue(Values parent)
         {
-            super(encoding);
+            super(Values.this);
         }
 
         byte bite;
@@ -86,7 +90,7 @@ public class Values
     
     public final Value SPACES = new StringBasedValue(Values.this);
     
-    public final Value LOW_VALUES = new Value(encoding) {
+    public final Value LOW_VALUES = new Value(Values.this) {
 
         public byte getByte()
         {
@@ -94,7 +98,7 @@ public class Values
         }
     };
     
-    public final Value HIGH_VALUES = new Value(encoding) {
+    public final Value HIGH_VALUES = new Value(Values.this) {
 
         public byte getByte()
         {

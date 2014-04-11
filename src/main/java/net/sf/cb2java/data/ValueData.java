@@ -34,9 +34,9 @@ public abstract class ValueData extends Data
         return true;
     }
     
-    public List getChildren()
+    public List<Data> getChildren()
     {
-        return Collections.EMPTY_LIST;
+        return Collections.emptyList();
     }
    
     @Override

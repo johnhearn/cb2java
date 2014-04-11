@@ -221,21 +221,22 @@ public class Decimal extends Numeric
     public Data parse(byte[] bytes)
     {
         String input = getString(bytes).trim();
-        String s;
+        String s = input;
         
         if (input.length() < 1) {
             s = null;
-        }else if (getSignPosition() == LEADING) {
-            char c = input.charAt(0); 
-            s = (isPositive(c) ? "" : "-") + getNumber(c) 
-                + (input.length() > 1 ? input.substring(1) : ""); 
-        } else {
-            int last = input.length() - 1; 
-            char c = input.charAt(last); 
-            s = (isPositive(c) ? "" : "-") 
-                + (input.length() > 1 ? input.substring(0, last-1) : "") + getNumber(c);
-        }
-        
+        } else if (signed()) {
+        	if (getSignPosition() == LEADING) {
+	            char c = input.charAt(0); 
+	            s = (isPositive(c) ? "" : "-") + getNumber(c) 
+	                + (input.length() > 1 ? input.substring(1) : ""); 
+	        } else {
+	            int last = input.length() - 1; 
+	            char c = input.charAt(last); 
+	            s = (isPositive(c) ? "" : "-") 
+	                + (input.length() > 1 ? input.substring(0, last) : "") + getNumber(c);
+	        }
+        }        
         BigInteger big = s == null ? null : new BigInteger(s);
         Data data = create();
         

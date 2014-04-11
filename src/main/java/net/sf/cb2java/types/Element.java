@@ -79,7 +79,7 @@ public abstract class Element
      * 
      * @return the children of this element or null if there are none
      */
-    public abstract List getChildren();
+    public abstract List<Element> getChildren();
     
     /**
      * returns the number of bytes of one instance of this element

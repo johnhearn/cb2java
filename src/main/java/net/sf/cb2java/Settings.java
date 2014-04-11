@@ -19,12 +19,17 @@
 package net.sf.cb2java;
 
 import java.util.Properties;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import net.sf.cb2java.types.Numeric;
 import net.sf.cb2java.types.Numeric.Position;
 
 public interface Settings
 {
     public static Settings DEFAULT = new Default();
+    
     
     String getEncoding();
     
@@ -38,6 +43,8 @@ public interface Settings
     
     public static class Default implements Settings
     {
+    	private static final Logger LOGGER = LoggerFactory.getLogger(Settings.class);
+    	
         private static final String DEFAULT_ENCODING;
         private static final boolean DEFAULT_LITTLE_ENDIAN;
         private static final String DEFAULT_FLOAT_CONVERSION;
@@ -48,9 +55,9 @@ public interface Settings
             Properties props = new Properties();
             
             try {
-                props.load(ClassLoader.getSystemResourceAsStream("copybook.props"));
+                props.load(Settings.class.getResourceAsStream("/copybook.props"));
             } catch (Exception e) {
-                // TODO logging
+            	LOGGER.warn("Could not load 'copybook.props' file, reverting to defaults.", e.getMessage());
             }  
             
             DEFAULT_ENCODING = getSetting("encoding", System.getProperty("file.encoding"), props);
@@ -65,17 +72,7 @@ public interface Settings
         {
             try {
                 String value = System.getProperty("cb2java." + name, defaultValue);
-                
-                try {
-                    try {
-                        value = props.getProperty("encoding", value);
-                    } catch (Exception e) {
-                        // TODO logging
-                    }
-                } catch (Exception e) {
-                    // TODO logging
-                }
-                
+                value = props.getProperty(name, value);
                 return value;
             } catch (Exception e) {
                 return defaultValue;

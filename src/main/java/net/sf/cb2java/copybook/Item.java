@@ -57,7 +57,7 @@ class Item
     Item parent;
     int length;
     
-    List children = new ArrayList();
+    List<Item> children = new ArrayList<Item>();
     
     String redefines;
     int occurs = 1;

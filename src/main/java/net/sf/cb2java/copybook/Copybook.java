@@ -48,7 +48,7 @@ public class Copybook extends Group implements Settings
     private String floatConversion = Settings.DEFAULT.getFloatConversion();
     private Numeric.Position signPosition = Settings.DEFAULT.getSignPosition();
     
-    private Map redefines = new HashMap();
+    private Map<String, Element> redefines = new HashMap<String, Element>();
     
     private final Values values;
     
