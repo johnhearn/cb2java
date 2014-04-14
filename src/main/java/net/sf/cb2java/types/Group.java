@@ -130,10 +130,7 @@ public class Group extends Element
     {
         byte[] out = new byte[end - start];
         
-//        System.out.println("sub: " + in.length + ", " + start + ", " + end);
-        
-        System.arraycopy(in, start, out, 0, out.length);
-        
+        System.arraycopy(in, start, out, 0, Math.min(out.length, in.length));        
         return out;
     }
     
