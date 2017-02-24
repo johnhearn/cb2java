@@ -1,45 +1,60 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
                       http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
+    <modelVersion>4.0.0</modelVersion>
 
-	<name>cb2java</name>
-	<groupId>net.sf.cb2java</groupId>
-	<artifactId>cb2java</artifactId>
-	<version>5.3</version>
-	<url>https://github.com/montoyaedu/cb2java</url>
+    <groupId>net.sf.cb2java</groupId>
+    <artifactId>cb2java</artifactId>
+    <version>5.3</version>
+    
+    <name>cb2java</name>
+    <description>Library that allows dynamic access to Copybook structures at run-time from a Java application</description>
+    <url>https://github.com/johnhearn/cb2java</url>
+    <inceptionYear>2006</inceptionYear>
 
-	<description>Library that allows dynamic access to Copybook structures at run-time from a Java application</description>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
 
-	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-	</properties>
-
-	<developers>
-		<developer>
-			<id>dubwai</id>
-			<url>http://sourceforge.net/users/dubwai</url>
-			<roles>
-				<role>developer</role>
-			</roles>
-		</developer>
-		<developer>
-			<id>ptrthomas</id>
-			<name>Peter Thomas</name>
-			<url>http://ptrthomas.users.sourceforge.net/</url>
-			<roles>
-				<role>developer</role>
-			</roles>
-		</developer>
-		<developer>
-			<id>montoyaedu</id>
-			<name>H. Eduardo Montoya Sánchez</name>
-			<url>https://github.com/montoyaedu</url>
-			<roles>
-				<role>developer</role>
-			</roles>
-		</developer>
+    <developers>
+	    <developer>
+            <name>James Watson</name>
+            <roles>
+                <role>original author</role>
+            </roles>
+        </developer>
+        <developer>
+            <id>dubwai</id>
+            <url>https://sourceforge.net/u/dubwai/profile/</url>
+            <roles>
+                <role>developer</role>
+            </roles>
+        </developer>
+        <developer>
+            <id>ptrthomas</id>
+            <name>Peter Thomas</name>
+            <url>https://sourceforge.net/u/ptrthomas/profile/</url>
+            <roles>
+                <role>developer</role>
+            </roles>
+        </developer>
+        <developer>
+            <id>devstopfix</id>
+            <name>James Every</name>
+            <url>https://github.com/devstopfix</url>
+            <roles>
+                <role>developer</role>
+            </roles>
+        </developer>
+        <developer>
+            <id>montoyaedu</id>
+            <name>H. Eduardo Montoya Sánchez</name>
+            <url>https://github.com/montoyaedu</url>
+            <roles>
+                <role>developer</role>
+            </roles>
+        </developer>
         <developer>
             <id>johnhearn</id>
             <name>John Hearn</name>
@@ -53,110 +68,110 @@
             <name>Enrico Comiti</name>
             <url>https://github.com/enr</url>
             <roles>
-                <role>developer</role>
+                <role>contributor</role>
             </roles>
         </developer>
-	</developers>
+    </developers>
 
-	<licenses>
-		<license>
-			<name>GNU GENERAL PUBLIC LICENSE Version 1, February 1989</name>
-			<url>http://www.gnu.org/licenses/gpl-1.0.txt</url>
-			<comments>See ./LICENSE</comments>
-		</license>
-	</licenses>
+    <licenses>
+        <license>
+            <name>GNU GENERAL PUBLIC LICENSE Version 1, February 1989</name>
+            <url>http://www.gnu.org/licenses/gpl-1.0.txt</url>
+            <comments>See ./LICENSE</comments>
+        </license>
+    </licenses>
 
-	<scm>
-		<url>https://github.com/montoyaedu/cb2java</url>
-		<connection>scm:git:git://github.com/montoyaedu/cb2java.git</connection>
-	</scm>
+    <scm>
+        <url>https://github.com/johnhearn/cb2java</url>
+        <connection>scm:git:git://github.com/johnhearn/cb2java.git</connection>
+    </scm>
 
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>sablecc-maven-plugin</artifactId>
-				<version>2.2</version>
-				<executions>
-					<execution>
-						<phase>generate-sources</phase>
-						<goals>
-							<goal>generate</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>2.3.2</version>
-				<configuration>
-					<source>1.6</source>
-					<target>1.6</target>
-				</configuration>
-			</plugin>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>sablecc-maven-plugin</artifactId>
+                <version>2.2</version>
+                <executions>
+                    <execution>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>2.3.2</version>
+                <configuration>
+                    <source>1.6</source>
+                    <target>1.6</target>
+                </configuration>
+            </plugin>
 
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>build-helper-maven-plugin</artifactId>
-				<executions>
-					<execution>
-						<id>add-source</id>
-						<phase>generate-sources</phase>
-						<goals>
-							<goal>add-source</goal>
-						</goals>
-						<configuration>
-							<sources>
-								<source>${project.build.directory}/generated-sources/sablecc</source>
-							</sources>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-		</plugins>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>build-helper-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>add-source</id>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>add-source</goal>
+                        </goals>
+                        <configuration>
+                            <sources>
+                                <source>${project.build.directory}/generated-sources/sablecc</source>
+                            </sources>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
 
-		<pluginManagement>
-			<plugins>
-				<plugin>
-					<groupId>org.eclipse.m2e</groupId>
-					<artifactId>lifecycle-mapping</artifactId>
-					<version>1.0.0</version>
-					<configuration>
-						<lifecycleMappingMetadata>
-							<pluginExecutions>
-								<pluginExecution>
-									<pluginExecutionFilter>
-										<groupId>org.codehaus.mojo</groupId>
-										<artifactId>sablecc-maven-plugin</artifactId>
-										<versionRange>[2.2,)</versionRange>
-										<goals>
-											<goal>generate</goal>
-										</goals>
-									</pluginExecutionFilter>
-									<action>
-										<execute>
-											<runOnIncremental>false</runOnIncremental>
-										</execute>
-									</action>
-								</pluginExecution>
-							</pluginExecutions>
-						</lifecycleMappingMetadata>
-					</configuration>
-				</plugin>
-			</plugins>
-		</pluginManagement>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.eclipse.m2e</groupId>
+                    <artifactId>lifecycle-mapping</artifactId>
+                    <version>1.0.0</version>
+                    <configuration>
+                        <lifecycleMappingMetadata>
+                            <pluginExecutions>
+                                <pluginExecution>
+                                    <pluginExecutionFilter>
+                                        <groupId>org.codehaus.mojo</groupId>
+                                        <artifactId>sablecc-maven-plugin</artifactId>
+                                        <versionRange>[2.2,)</versionRange>
+                                        <goals>
+                                            <goal>generate</goal>
+                                        </goals>
+                                    </pluginExecutionFilter>
+                                    <action>
+                                        <execute>
+                                            <runOnIncremental>false</runOnIncremental>
+                                        </execute>
+                                    </action>
+                                </pluginExecution>
+                            </pluginExecutions>
+                        </lifecycleMappingMetadata>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
 
-	</build>
+    </build>
 
-	<dependencies>
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>3.8.1</version>
-			<scope>test</scope>
-		</dependency>
-	</dependencies>
+    <dependencies>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>3.8.1</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
 
 
 
