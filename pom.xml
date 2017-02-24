@@ -40,6 +40,22 @@
 				<role>developer</role>
 			</roles>
 		</developer>
+        <developer>
+            <id>johnhearn</id>
+            <name>John Hearn</name>
+            <url>https://github.com/johnhearn</url>
+            <roles>
+                <role>developer</role>
+            </roles>
+        </developer>
+        <developer>
+            <id>enr</id>
+            <name>Enrico Comiti</name>
+            <url>https://github.com/enr</url>
+            <roles>
+                <role>developer</role>
+            </roles>
+        </developer>
 	</developers>
 
 	<licenses>
