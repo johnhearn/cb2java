@@ -19,6 +19,7 @@
 package net.sf.cb2java;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Properties;
 import net.sf.cb2java.types.Numeric;
 import net.sf.cb2java.types.Numeric.Position;
@@ -48,14 +49,20 @@ public interface Settings
         static {
             Properties props = new Properties();
             
-            try {
-                props.load(Settings.class.getResourceAsStream("/copybook.props"));
-            } catch (NullPointerException e) {
+            InputStream is = Settings.class.getResourceAsStream("/copybook.props");
+            if (is == null) {
                 System.out.println("Could not load 'copybook.props' file, reverting to defaults.");
-            } catch (IOException e) {
-                e.printStackTrace();
-                System.out.println("Could not load 'copybook.props' file, reverting to defaults.");
-            }  
+            } else {
+                try {
+                    props.load(is);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    System.out.println("Could not load 'copybook.props' file, reverting to defaults.");
+                } finally {
+                	try { is.close(); }
+					catch (IOException e) {}
+                }
+            }
             
             DEFAULT_ENCODING = getSetting("encoding", System.getProperty("file.encoding"), props);
             DEFAULT_LITTLE_ENDIAN = "false".equals(getSetting("little-endian", "false", props));
