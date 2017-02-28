@@ -35,7 +35,7 @@ public class Copybooks {
              } finally {
                 try {
                   fin.close();
-                } catch (IOException io) {};
+                } catch (IOException io) {}
              }
         }
         return copybooks;
