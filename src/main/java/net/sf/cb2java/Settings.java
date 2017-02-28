@@ -74,13 +74,12 @@ public interface Settings
         
         private static String getSetting(String name, String defaultValue, Properties props)
         {
-            try {
-                String value = System.getProperty("cb2java." + name, defaultValue);
-                value = props.getProperty(name, value);
-                return value;
-            } catch (Exception e) {
-                return defaultValue;
-            }
+        	String result = defaultValue;
+        	try {
+            	result = System.getProperty("cb2java." + name, result);
+            	result = props.getProperty(name, result);
+			} catch (RuntimeException e) { }
+			return result;
         }
         
         public String getEncoding()
