@@ -74,6 +74,7 @@ public class CobolPreprocessor {
             }
             sb.append("\n");
           }
+          buffer.close();
         }
         catch (Exception e) {
           e.printStackTrace();
