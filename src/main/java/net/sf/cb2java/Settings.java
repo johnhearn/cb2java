@@ -43,7 +43,7 @@ public interface Settings
         private static final String DEFAULT_ENCODING;
         private static final boolean DEFAULT_LITTLE_ENDIAN;
         private static final String DEFAULT_FLOAT_CONVERSION;
-        private static final Numeric.Position DEFAULT_DEFAULT_SIGN_POSITION;
+        private static final Numeric.Position DEFAULT_SIGN_POSITION;
         private static final Values DEFAULT_VALUES = new Values();
         
         static {
@@ -68,7 +68,7 @@ public interface Settings
             DEFAULT_LITTLE_ENDIAN = "false".equals(getSetting("little-endian", "false", props));
             DEFAULT_FLOAT_CONVERSION = getSetting("float-conversion", 
                 "net.sf.cb2java.copybook.floating.IEEE754", props);
-            DEFAULT_DEFAULT_SIGN_POSITION = "leading".equalsIgnoreCase(
+            DEFAULT_SIGN_POSITION = "leading".equalsIgnoreCase(
                 getSetting("default-sign-position", "trailing", props)) ? Numeric.LEADING : Numeric.TRAILING;
         }
         
@@ -105,7 +105,7 @@ public interface Settings
 
         public Position getSignPosition()
         {
-            return DEFAULT_DEFAULT_SIGN_POSITION;
+            return DEFAULT_SIGN_POSITION;
         }
     }
 }
