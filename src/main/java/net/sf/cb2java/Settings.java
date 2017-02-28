@@ -18,6 +18,7 @@
  */
 package net.sf.cb2java;
 
+import java.io.IOException;
 import java.util.Properties;
 import net.sf.cb2java.types.Numeric;
 import net.sf.cb2java.types.Numeric.Position;
@@ -49,8 +50,11 @@ public interface Settings
             
             try {
                 props.load(Settings.class.getResourceAsStream("/copybook.props"));
-            } catch (Exception e) {
-                System.out.println("Could not load 'copybook.props' file, reverting to defaults." + e);
+            } catch (NullPointerException e) {
+                System.out.println("Could not load 'copybook.props' file, reverting to defaults.");
+            } catch (IOException e) {
+                e.printStackTrace();
+                System.out.println("Could not load 'copybook.props' file, reverting to defaults.");
             }  
             
             DEFAULT_ENCODING = getSetting("encoding", System.getProperty("file.encoding"), props);
