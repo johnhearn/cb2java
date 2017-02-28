@@ -19,6 +19,7 @@
 package net.sf.cb2java.copybook;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.Reader;
 import java.util.Properties;
 
@@ -56,8 +57,7 @@ public class CobolPreprocessor {
 
         StringBuffer sb = new StringBuffer();
 
-        try {
-          BufferedReader buffer = new BufferedReader(reader);
+        try (BufferedReader buffer = new BufferedReader(reader)) {
           String s = null;
           while ((s = buffer.readLine()) != null) {         
             if (s.length() > columnStart) {
@@ -74,9 +74,8 @@ public class CobolPreprocessor {
             }
             sb.append("\n");
           }
-          buffer.close();
         }
-        catch (Exception e) {
+        catch (IOException e) {
           e.printStackTrace();
           return null;
         }
