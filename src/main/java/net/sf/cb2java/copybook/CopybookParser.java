@@ -18,6 +18,7 @@
  */
 package net.sf.cb2java.copybook;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.PushbackReader;
@@ -25,8 +26,10 @@ import java.io.Reader;
 import java.io.StringReader;
 import net.sf.cb2java.copybook.DebugLexer;
 import net.sf.cb2xml.sablecc.lexer.Lexer;
+import net.sf.cb2xml.sablecc.lexer.LexerException;
 import net.sf.cb2xml.sablecc.node.Start;
 import net.sf.cb2xml.sablecc.parser.Parser;
+import net.sf.cb2xml.sablecc.parser.ParserException;
 
 /**
  * 
@@ -66,32 +69,26 @@ public class CopybookParser
      */
     public static Copybook parse(String name, Reader reader)
     {        
-        Copybook document = null;
-        Lexer lexer = null;
+        String preProcessed = CobolPreprocessor.preProcess(reader);
+        StringReader sr = new StringReader(preProcessed);
+        PushbackReader pbr = new PushbackReader(sr, 1000);
+        
+        Lexer lexer = (debug) ? new DebugLexer(pbr) : new Lexer(pbr);
+        
+        Parser parser = new Parser(lexer);
+        CopybookAnalyzer copyBookAnalyzer = new CopybookAnalyzer(name, parser);
+        Start ast;
         try {
-            String preProcessed = CobolPreprocessor.preProcess(reader);
-            StringReader sr = new StringReader(preProcessed);
-            PushbackReader pbr = new PushbackReader(sr, 1000);
-            
-            if (debug) {
-                lexer = new DebugLexer(pbr);
-            } else {
-                lexer = new Lexer(pbr);
-            }
-            
-            Parser parser = new Parser(lexer);
-            Start ast = parser.parse();
-            CopybookAnalyzer copyBookAnalyzer = new CopybookAnalyzer(name, parser);
-            ast.apply(copyBookAnalyzer);
-            document = copyBookAnalyzer.getDocument();
-        } catch (Exception e) {
+			ast = parser.parse();
+        } catch (ParserException | LexerException | IOException e) {
             throw new RuntimeException("fatal parse error\n"
                 + (lexer instanceof DebugLexer 
                 ? "=== buffer dump start ===\n"
                 + ((DebugLexer) lexer).getBuffer()
                 + "\n=== buffer dump end ===" : ""), e);
         }
+        ast.apply(copyBookAnalyzer);
         
-        return document;
+        return copyBookAnalyzer.getDocument();
     }
 }
