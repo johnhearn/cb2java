@@ -120,7 +120,7 @@ public class AlphaNumeric extends Characters
         String s = (String) data;
         
         if (!pattern.matcher(getValue().fillString(s, getLength(), Value.RIGHT)).matches()) {
-            System.out.print(pattern.toString());
+            // System.out.print(pattern.toString());
             throw new IllegalArgumentException(data + " does not match pattern '" + originalPattern
                 + "' specified for " + getName());
         }
