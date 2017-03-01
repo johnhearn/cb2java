@@ -27,15 +27,10 @@ public class Copybooks {
         Map<String, Copybook> copybooks = new TreeMap<String, Copybook>();
         for(File f:files) {
              String copybookName = copybookNameOfFile(f);
-             FileInputStream fin = new FileInputStream(f);
-             try {
+             try (FileInputStream fin = new FileInputStream(f)) {
                 copybooks.put(copybookName, CopybookParser.parse(copybookName, fin));
-             } catch (RuntimeException e) {
+             } catch (IOException | RuntimeException e) {
                  throw new RuntimeException(String.format("Cannot parse copybook structure in file '%s'", f.getName()), e);
-             } finally {
-                try {
-                  fin.close();
-                } catch (IOException io) {}
              }
         }
         return copybooks;
