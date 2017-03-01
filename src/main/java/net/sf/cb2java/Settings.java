@@ -53,21 +53,15 @@ public interface Settings {
 		static {
 			Properties props = new Properties();
 
-			InputStream is = Settings.class.getResourceAsStream("/copybook.props");
-			if (is == null) {
-				System.out.println("Could not load 'copybook.props' file, reverting to defaults.");
-			} else {
-				try {
-					props.load(is);
-				} catch (IOException e) {
-					e.printStackTrace();
+			try (InputStream is = Settings.class.getResourceAsStream("/copybook.props")) {
+				if (is == null) {
 					System.out.println("Could not load 'copybook.props' file, reverting to defaults.");
-				} finally {
-					try {
-						is.close();
-					} catch (IOException e) {
-					}
+				} else {
+					props.load(is);
 				}
+			} catch (IOException e) {
+				e.printStackTrace();
+				System.out.println("Could not load 'copybook.props' file, reverting to defaults.");
 			}
 
 			DEFAULT_ENCODING = getSetting("encoding", System.getProperty("file.encoding"), props);
