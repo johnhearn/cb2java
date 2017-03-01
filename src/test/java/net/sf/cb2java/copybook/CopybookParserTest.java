@@ -98,7 +98,7 @@ public class CopybookParserTest extends TestCase {
         
         Map<String,Object> subEl = sub.get(0);
         assertTrue(subEl.containsKey("E"));
-        assertEquals("E", subEl.get("E"));
+        assertEquals(" E", subEl.get("E"));
         assertTrue(subEl.containsKey("F"));
         assertEquals("FF", subEl.get("F"));
         
@@ -119,8 +119,8 @@ public class CopybookParserTest extends TestCase {
         assertEquals(2, sub.size());
         assertEquals("EEE", ((Map<String,Object>)sub.get(1)).get("E").toString());
         assertEquals("FFF", ((Map<String,Object>)sub.get(1)).get("F").toString());
-        assertEquals("[{E=E, F=FF}, {E=EEE, F=FFF}]", Arrays.toString(sub.toArray()));
-        assertEquals("{ROOT={A=ABCDEF, B=BCDE, C=12345, D=1234, SUB=[{E=E, F=FF}, {E=EEE, F=FFF}]}}", record.toString());
+        assertEquals("[{E= E, F=FF}, {E=EEE, F=FFF}]", Arrays.toString(sub.toArray()));
+        assertEquals("{ROOT={A=ABCDEF, B=BCDE, C=12345, D=1234, SUB=[{E= E, F=FF}, {E=EEE, F=FFF}]}}", record.toString());
     }
     
 }

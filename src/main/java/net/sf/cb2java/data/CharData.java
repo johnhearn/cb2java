@@ -37,13 +37,11 @@ public class CharData extends ValueData
     }
     
     /**
-     * TODO - make this a rightTrim()
-     * 
      * @return the trimmed String
      */
     public String getString()
     {
-        return data == null ? "" : data.trim();
+        return data == null ? "" : trimRight(data);
     }
     
     public Object getValue()
@@ -90,7 +88,14 @@ public class CharData extends ValueData
      */
     @Override
     protected Object toPOJO() {
-        // todo make this a right-trim
         return this.getString();
+    }
+
+    private static String trimRight(String s) {
+        int i = s.length()-1;
+        while (i >= 0 && Character.isWhitespace(s.charAt(i))) {
+            i--;
+        }
+        return s.substring(0,i+1);
     }
 }
