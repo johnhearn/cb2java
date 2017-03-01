@@ -152,7 +152,7 @@ public class SignedSeparate extends Numeric
         } else {
             BigInteger bigI = getUnscaled(data);
         
-            positive = ZERO.unscaledValue().compareTo(bigI) < 0;
+            positive = BigDecimal.ZERO.unscaledValue().compareTo(bigI) < 0;
             
             s = bigI.toString();
         }

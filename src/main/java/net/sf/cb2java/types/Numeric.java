@@ -33,7 +33,6 @@ import net.sf.cb2java.data.IntegerData;
  */
 public abstract class Numeric extends Leaf
 {
-    public static final BigDecimal ZERO = new BigDecimal("0");
     public static final Position LEADING = new Position();
     public static final Position TRAILING = new Position();
  
@@ -202,7 +201,7 @@ public abstract class Numeric extends Leaf
             bigD = (BigDecimal) data;
         }
         
-        boolean negative = ZERO.compareTo(bigD) > 0;
+        boolean negative = BigDecimal.ZERO.compareTo(bigD) > 0;
         
         if (negative && !signed()) {
             throw (IllegalArgumentException) createEx(bigD, getName() 
@@ -211,11 +210,9 @@ public abstract class Numeric extends Leaf
         
         int scale = bigD.scale();
         
-        if (decimalPlaces() > 0) {
-            if (scale > decimalPlaces()) {
-                throw (IllegalArgumentException) createEx(bigD, "must have " 
-                    + decimalPlaces() + " decimal places").fillInStackTrace();
-            }
+        if (decimalPlaces() > 0 && scale > decimalPlaces()) {
+            throw (IllegalArgumentException) createEx(bigD, "must have " 
+                + decimalPlaces() + " decimal places").fillInStackTrace();
         }
         
         bigD = bigD.setScale(decimalPlaces());

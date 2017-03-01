@@ -265,7 +265,7 @@ public class Decimal extends Numeric
         BigInteger bigI = getUnscaled(data);
         boolean positive;
         
-        if (ZERO.unscaledValue().compareTo(bigI) > 0) {
+        if (BigDecimal.ZERO.unscaledValue().compareTo(bigI) > 0) {
             bigI = bigI.abs();
             positive = false;
         } else {

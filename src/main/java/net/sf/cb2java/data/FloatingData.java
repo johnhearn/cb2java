@@ -57,7 +57,7 @@ public class FloatingData extends ValueData
      */
     public BigDecimal getBigDecimal()
     {
-        return data == null ? new BigDecimal(0) : data;
+        return data == null ? BigDecimal.ZERO : data;
     }
     
     @Override

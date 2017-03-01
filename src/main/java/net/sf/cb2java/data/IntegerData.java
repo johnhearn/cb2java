@@ -49,7 +49,7 @@ public class IntegerData extends NumericData
     
     public BigInteger getBigInteger()
     {
-        return data == null ? new BigInteger("0") : data;
+        return data == null ? BigInteger.ZERO : data;
     }
     
     public void setValue(long data)
