@@ -26,7 +26,7 @@ import java.util.List;
  * 
  * @author Matt Watson
  */
-abstract class Leaf extends Element
+public abstract class Leaf extends Element
 {
     protected Leaf(String name, int level, final int occurs)
     {
