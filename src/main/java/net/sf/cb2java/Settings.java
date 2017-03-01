@@ -25,7 +25,7 @@ import net.sf.cb2java.types.Numeric;
 import net.sf.cb2java.types.Numeric.Position;
 
 public interface Settings {
-	public static Settings DEFAULT = new Default();
+	static Settings DEFAULT = new Default();
 
 	String getEncoding();
 
@@ -41,7 +41,7 @@ public interface Settings {
 
 	int getColumnEnd();
 
-	public static class Default implements Settings {
+	static class Default implements Settings {
 		private static final String DEFAULT_ENCODING;
 		private static final boolean DEFAULT_LITTLE_ENDIAN;
 		private static final String DEFAULT_FLOAT_CONVERSION;
