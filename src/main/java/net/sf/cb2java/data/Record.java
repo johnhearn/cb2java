@@ -23,7 +23,7 @@ import java.util.Map;
 
 public class Record extends GroupData
 {
-    public Record(String name, GroupData data)
+    public Record(GroupData data)
     {
         super(data.definition, data.children);
     }

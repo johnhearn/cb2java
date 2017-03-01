@@ -62,7 +62,7 @@ public class Copybook extends Group implements Settings
         super(name, 0, 0);
         
         this.values = values;
-        values.setEncoding(encoding);
+        this.values.setEncoding(encoding);
     }
     
     public Values getValues()
@@ -101,7 +101,7 @@ public class Copybook extends Group implements Settings
      */
     public Record createNew()
     {
-        return new Record(getName(), (GroupData) super.create());
+        return new Record((GroupData) super.create());
     }
     
     /**
@@ -113,7 +113,7 @@ public class Copybook extends Group implements Settings
      */
     public Record parseData(byte[] data) throws IOException
     {
-        return new Record(getName(), (GroupData) parse(data));
+        return new Record((GroupData) parse(data));
     }
     
     public List<Record> parseData(InputStream stream) throws IOException
@@ -122,7 +122,7 @@ public class Copybook extends Group implements Settings
         List<Record> list = new ArrayList<Record>();
         
         while (buffer.hasNext()) {
-            list.add(new Record(getName(), (GroupData) parse(buffer.getNext())));
+            list.add(new Record((GroupData) parse(buffer.getNext())));
         }
         
         return list;
@@ -242,11 +242,7 @@ public class Copybook extends Group implements Settings
         
         public boolean hasNext()
         {
-            if (!(position < size)) {
-                if (!getMore()) return false;
-            }
-            
-            return true;
+            return (position < size) || getMore();
         }
         
         private int nextEnd()
