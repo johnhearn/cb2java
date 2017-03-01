@@ -35,6 +35,9 @@ import net.sf.cb2java.Settings;
  */
 public class CobolPreprocessor {
 
+	private CobolPreprocessor() {
+	}
+
 	public static String preProcess(Reader reader) {
     	// TODO: figure out a way to pass copybook specific settings for non-default margins treated as comment.
 		int columnStart = Settings.DEFAULT.getColumnStart();
