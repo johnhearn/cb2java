@@ -24,7 +24,7 @@ import java.io.InputStreamReader;
 import java.io.PushbackReader;
 import java.io.Reader;
 import java.io.StringReader;
-import net.sf.cb2java.copybook.DebugLexer;
+
 import net.sf.cb2xml.sablecc.lexer.Lexer;
 import net.sf.cb2xml.sablecc.lexer.LexerException;
 import net.sf.cb2xml.sablecc.node.Start;
@@ -73,7 +73,7 @@ public class CopybookParser
         StringReader sr = new StringReader(preProcessed);
         PushbackReader pbr = new PushbackReader(sr, 1000);
         
-        Lexer lexer = (debug) ? new DebugLexer(pbr) : new Lexer(pbr);
+        Lexer lexer = debug ? new DebugLexer(pbr) : new Lexer(pbr);
         
         Parser parser = new Parser(lexer);
         CopybookAnalyzer copyBookAnalyzer = new CopybookAnalyzer(name, parser);
