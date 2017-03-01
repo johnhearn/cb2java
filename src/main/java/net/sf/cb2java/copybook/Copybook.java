@@ -179,7 +179,17 @@ public class Copybook extends Group implements Settings
         return signPosition;
     }
     
-    /**
+	@Override
+	public int getColumnStart() {
+		return Settings.DEFAULT.getColumnStart();
+	}
+
+	@Override
+	public int getColumnEnd() {
+		return Settings.DEFAULT.getColumnEnd();
+	}
+
+	/**
      * a helper class for buffering the data as it is processed
      * 
      * @author James Watson
@@ -263,4 +273,5 @@ public class Copybook extends Group implements Settings
             return bytes;
         }
     }
+
 }

@@ -21,7 +21,8 @@ package net.sf.cb2java.copybook;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.Reader;
-import java.util.Properties;
+
+import net.sf.cb2java.Settings;
 
 /**
  * Very simple COBOL pre-processor that chops the left and right margins. Column
@@ -35,18 +36,9 @@ import java.util.Properties;
 public class CobolPreprocessor {
 
 	public static String preProcess(Reader reader) {
-		int columnStart = 6;
-		int columnEnd = 72;
-
-		Properties props = new Properties();
-		String columnStartProperty = props.getProperty("column.start");
-		String columnEndProperty = props.getProperty("column.end");
-		if (columnStartProperty != null) {
-			columnStart = Integer.parseInt(columnStartProperty);
-		}
-		if (columnEndProperty != null) {
-			columnEnd = Integer.parseInt(columnEndProperty);
-		}
+    	// TODO: figure out a way to pass copybook specific settings for non-default margins treated as comment.
+		int columnStart = Settings.DEFAULT.getColumnStart();
+		int columnEnd = Settings.DEFAULT.getColumnEnd();
 
 		StringBuffer sb = new StringBuffer();
 
