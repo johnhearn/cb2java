@@ -40,7 +40,7 @@ public class Packed extends Numeric
 
     public Packed(String name, String picture)
     {
-        this("", 0, 1, picture);
+        this(name, 0, 1, picture);
     }
     
     public Packed(String picture)
