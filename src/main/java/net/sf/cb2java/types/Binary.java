@@ -26,24 +26,21 @@ import net.sf.cb2java.data.DecimalData;
 import net.sf.cb2java.data.IntegerData;
 
 /**
- * class that represents binary data types 
+ * class that represents binary data types.
  * 
  * @author James Watson
  */
-public class Binary extends Numeric
-{
+public class Binary extends Numeric {
     private final int digits;
     private final int length;
     
-    public Binary(String name, int level, int occurs, String picture)
-    {
+    public Binary(String name, int level, int occurs, String picture) {
         super(name, level, occurs, picture);
         digits = super.getLength();
         length = getLength(digits);
     }
     
-    protected static final int getLength(int digits)
-    {   
+    private static final int getLength(int digits) {
         if (1 <= digits && digits <= 4) {
             return 2;
         } else if (5 <= digits && digits <= 9) {
@@ -56,53 +53,33 @@ public class Binary extends Numeric
     }
     
     @Override
-    public int getLength()
-    {
+    public int getLength() {
         return length;
     }
 
-    public int digits()
-    {
+    @Override
+    public int digits() {
         return digits;
     }
-        
-    public Data parse(byte[] input)
-    {
-//        display(input);
-        
+    
+    @Override
+    public Data parse(byte[] input) {
         BigInteger bigI = new BigInteger(input);
-        
         Data data = create();
         
         if (data instanceof DecimalData) {
             DecimalData dData = (DecimalData) data;
-            
             BigDecimal bigD = new BigDecimal(bigI, decimalPlaces());
-            
             dData.setValue(bigD);
-            
-            return data;
         } else {
             IntegerData iData = (IntegerData) data;
-            
             iData.setValue(bigI);
-            
-            return data;
         }
+        return data;
     }
 
-//    private static void display(byte[] bytes)
-//    {
-//        for (int i = 0; i < bytes.length; i++) {
-//            byte b = bytes[i];
-//            String s = "0" + Integer.toHexString(0xFF & b);
-//            System.out.print(s.toUpperCase().substring(s.length() - 2));
-//            System.out.print(' ');
-//        }
-//    }
-    
-    public byte[] toBytes(Object data)
-    {
+    @Override
+    public byte[] toBytes(Object data) {
         BigInteger bigI;
         
         if (data == null) {
@@ -110,8 +87,6 @@ public class Binary extends Numeric
         } else {
             bigI = getUnscaled(data);
         }
-        
-//        display(copybook.values.LOW_VALUES.fill(bigI.toByteArray(), length(), Value.LEFT));
         
         return getSettings().getValues().LOW_VALUES.fill(bigI.toByteArray(), getLength(), Value.LEFT);
     }
@@ -122,8 +97,7 @@ public class Binary extends Numeric
      * @param input the bytes to reverse
      * @return the reversed byte
      */
-    public static byte[] reverse(byte[] input)
-    {
+    public static byte[] reverse(byte[] input) {
         final int length = input.length;
         byte[] output = new byte[length];
         
@@ -135,28 +109,24 @@ public class Binary extends Numeric
     }
     
     /**
-     * Binary extension for native types 
+     * Binary extension for native types.
      * 
      * @author Matt Watson
      */
-    public static class Native extends Binary
-    {
-        public Native(String name, int level, int occurs, String picture)
-        {
+    public static class Native extends Binary {
+    	
+        public Native(String name, int level, int occurs, String picture) {
             super(name, level, occurs, picture);
         }
         
         @Override
-        public byte[] toBytes(Object data)
-        {
+        public byte[] toBytes(Object data) {
             byte[] bytes = super.toBytes(data);
-            
             return getSettings().getLittleEndian() ? reverse(bytes) : bytes;
         }
         
         @Override
-        public Data parse(byte[] input)
-        {
+        public Data parse(byte[] input) {
             return super.parse(getSettings().getLittleEndian() ? reverse(input) : input);
         }
     }

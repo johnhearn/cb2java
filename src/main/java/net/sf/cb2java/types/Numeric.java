@@ -27,20 +27,20 @@ import net.sf.cb2java.data.DecimalData;
 import net.sf.cb2java.data.IntegerData;
 
 /**
- * Base type for numeric elements
+ * Base type for numeric elements.
  *
  * @author Matt Watson
  */
-public abstract class Numeric extends Leaf
-{
+public abstract class Numeric extends Leaf {
+	
     private final int length;
     private final int decimalPlaces;
     private final boolean signed;
-    private String picture;
+    private final String picture;
     
     protected Numeric(String name, int level, int occurs, final String picture) {
         super(name, level, occurs);
-        this.setPicture(picture);
+        this.picture = picture;
         this.length = getLength(picture);
         this.decimalPlaces = getScale(picture);
         this.signed = isSigned(picture);
@@ -50,8 +50,7 @@ public abstract class Numeric extends Leaf
         return picture.charAt(0) == 'S';
     }
     
-    public static int getLength(String pic)
-    {
+    protected static int getLength(String pic) {
         int length = 0;
         
         for (int i = 0; i < pic.length(); i++) {
@@ -73,7 +72,7 @@ public abstract class Numeric extends Leaf
         return length;
     }
     
-    public static int getScale(String pic) {
+    protected static int getScale(String pic) {
     	int vPos = pic.indexOf("V");
     	if (vPos < 0) {
     		return 0;
@@ -82,76 +81,39 @@ public abstract class Numeric extends Leaf
     	}
     }
     
-    private static int getScale(String pic, int length)
-    {
-        int position = 0;
-        pic = pic.toUpperCase();
-        
-        if (pic.matches("S?[0-9]+\\([0-9]+\\)(V)[0-9]+"))
-        {
-            for (int i = 0; i < pic.length(); i++) {
-                char c = pic.charAt(i);
-                if (c == '(') {
-                    int pos = pic.indexOf(')', i);
-                    int times = Integer.parseInt(pic.substring(i + 1, pos));
-                    i = pos;
-                    position += times;
-                } else if (c == 'V') {
-                    return length - position;
-                }
-            }
-        }
-        else if (pic.matches("S?[0-9]+(V)[0-9]+"))
-        {
-        	return length - pic.indexOf('V');
-        }
-        
-        return 0;
-    }
-    
-    public final boolean signed()
-    {
+    protected final boolean signed() {
         return signed;
     }
     
     public abstract int digits();
-//    {
-//        return length();
-//    }
     
-    public int getLength()
-    {
+    @Override
+    public int getLength() {
         return length;
     }
     
-    public int decimalPlaces()
-    {
+    public int decimalPlaces() {
         return decimalPlaces;
     }
     
-    public DecimalFormat getFormatObject()
-    {
+    public DecimalFormat getFormatObject() {
         StringBuffer buffer = new StringBuffer("#");
                 
         for (int i = 0; i < digits(); i++) {
             if (i + decimalPlaces() == digits()) {
                 buffer.append('.');
             }
-            
             buffer.append('0');
         }
         
-        if (decimalPlaces() < 1) buffer.append('.');
+        if (decimalPlaces() < 1) {
+        	buffer.append('.');
+        }
         
         buffer.append('#');
                 
         return new DecimalFormat(buffer.toString());
     }
-    
-//    public void validate(Object data)
-//    {
-//        validate(data, length());
-//    }
     
     /**
      * validates the data with the given decimal (printed) length
@@ -161,18 +123,13 @@ public abstract class Numeric extends Leaf
      * 
      * @param data
      */
-    public void validate(Object data)//, int length)
-    {
-        if (data == null) return;
-        
-        BigDecimal bigD;
-        
-        if (data instanceof BigInteger) {
-            bigD = new BigDecimal((BigInteger) data);
-        } else {
-            bigD = (BigDecimal) data;
+    @Override
+    public void validate(Object data) {
+        if (data == null) {
+        	return;
         }
         
+        BigDecimal bigD = (data instanceof BigInteger) ? new BigDecimal((BigInteger) data) : (BigDecimal) data;
         boolean negative = BigDecimal.ZERO.compareTo(bigD) > 0;
         
         if (negative && !signed()) {
@@ -188,10 +145,11 @@ public abstract class Numeric extends Leaf
         }
         
         bigD = bigD.setScale(decimalPlaces());
-            
         String s = bigD.unscaledValue().toString();
         
-        if (negative) s = s.substring(1);
+        if (negative) {
+        	s = s.substring(1);
+        }
             
         if (s.length() > digits()) {
             throw (IllegalArgumentException) createEx(bigD, "must be no longer than " 
@@ -200,13 +158,11 @@ public abstract class Numeric extends Leaf
     }
     
     @Override
-    public Value getValue()
-    {
+    public Value getValue() {
         return super.getValue() == null ? getSettings().getValues().ZEROS : super.getValue();
     }
     
-    protected BigInteger getUnscaled(Object data)
-    {
+    protected BigInteger getUnscaled(Object data) {
         if (data instanceof BigInteger) {
             return (BigInteger) data;
         } else {
@@ -220,30 +176,20 @@ public abstract class Numeric extends Leaf
         }
     }
     
-    public Data create()
-    {
-        if (decimalPlaces() > 0) {
-            return new DecimalData(this);
-        } else {
-            return new IntegerData(this);
-        }
+    @Override
+    public Data create() {
+    	return (decimalPlaces() > 0) ? new DecimalData(this) : new IntegerData(this);
     }
     
-    public IllegalArgumentException createEx(BigDecimal data, String reason)
-    {
+    private IllegalArgumentException createEx(BigDecimal data, String reason) {
         return createEx(data, reason, null);
     }
     
-    public IllegalArgumentException createEx(BigDecimal data, String reason, Throwable cause)
-    {
+    private IllegalArgumentException createEx(BigDecimal data, String reason, Throwable cause) {
         return new IllegalArgumentException(data + " is not valid for " + getName() + ". " + reason 
             + (cause == null ? "" : " " + cause.getMessage()));
     }
     
-    private void setPicture(String picture) {
-		this.picture = picture;
-	}
-
 	public String getPicture() {
 		return picture;
 	}

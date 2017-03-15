@@ -26,14 +26,13 @@ import net.sf.cb2java.data.DecimalData;
 import net.sf.cb2java.data.IntegerData;
 
 /**
- * class that represents decimal (zoned) data types
+ * class that represents decimal (zoned) data types.
  *
  * @author James Watson
  */
-public class Decimal extends SignedNumeric
-{
-    public Decimal(String name, int level, int occurs, String picture, SignPosition signPosition)
-    {
+public class Decimal extends SignedNumeric {
+	
+    public Decimal(String name, int level, int occurs, String picture, SignPosition signPosition) {
         super(name, level, occurs, picture, signPosition);
     }
     
@@ -45,8 +44,7 @@ public class Decimal extends SignedNumeric
      * @param overpunch the char to overpunch
      * @return the overpunched char
      */
-    private char getChar(boolean positive, char overpunch)
-    {
+    private char getChar(boolean positive, char overpunch) {
         if (!signed()) {
             return overpunch;
         } else if (positive) {
@@ -86,8 +84,7 @@ public class Decimal extends SignedNumeric
      * @param overpunched the char to check
      * @return whether the given overpunched char is positive
      */
-    private boolean isPositive(char overpunched)
-    {
+    private boolean isPositive(char overpunched) {
         if (!signed()) {
             return true;
         } else {
@@ -136,8 +133,7 @@ public class Decimal extends SignedNumeric
      * @param overpunched
      * @return the digit char
      */
-    private char getNumber(char overpunched)
-    {
+    private char getNumber(char overpunched) {
         if (!signed()) {
             return overpunched;
         } else {
@@ -188,8 +184,8 @@ public class Decimal extends SignedNumeric
         throw new IllegalArgumentException("invalid char: " + overpunched);
     }
     
-    public Data parse(byte[] bytes)
-    {
+    @Override
+    public Data parse(byte[] bytes) {
         String input = getString(bytes).trim();
         String s = input;
         
@@ -206,7 +202,7 @@ public class Decimal extends SignedNumeric
 	            s = (isPositive(c) ? "" : "-") 
 	                + (input.length() > 1 ? input.substring(0, last) : "") + getNumber(c);
 	        } else {
-	        	throw new IllegalStateException();
+	        	throw new IllegalStateException("undefined sign position");
 	        }
         }        
         BigInteger big = s == null ? null : new BigInteger(s);
@@ -228,8 +224,8 @@ public class Decimal extends SignedNumeric
         }
     }
     
-    public byte[] toBytes(Object data)
-    {
+    @Override
+    public byte[] toBytes(Object data) {
         if (data == null) {
             return getValue().fill(getLength());
         } 
@@ -252,23 +248,14 @@ public class Decimal extends SignedNumeric
             int last = output.length - 1;
             output[last] = (byte) getChar(positive, (char) output[last]);
         } else {
-        	throw new IllegalStateException();
+        	throw new IllegalStateException("undefined sign position");
         }
         
         return output;
-        
-//        s = getValue().fillString(s, getLength(), Value.LEFT);
-//        
-//        if (getSignPosition() == LEADING) {
-//            return getBytes(getChar(positive, s.charAt(0)) + s.substring(1));
-//        } else {
-//            int last = s.length() - 1;
-//            return getBytes(s.substring(0, last) + getChar(positive, s.charAt(last)));
-//        }
     }
 
-    public int digits()
-    {
+    @Override
+    public int digits() {
         return getLength();
     }
 }

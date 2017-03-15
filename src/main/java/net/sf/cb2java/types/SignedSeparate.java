@@ -31,46 +31,8 @@ public class SignedSeparate extends SignedNumeric {
         super(name, level, occurs, picture, signPosition);
     }
     
-    public static int getLength(String pic) {
-        int length = 0;
-        
-        for (int i = 0; i < pic.length(); i++) {
-            char c = pic.charAt(i);
-            
-            if (c == '(') {
-                int pos = pic.indexOf(')', i);
-                int times = Integer.parseInt(pic.substring(i + 1, pos));
-                i = pos;
-                length += times;
-            }
-        }
-        
-        return length;
-    }
-    
-    public static int getScale(String pic, int length)
-    {
-        int position = 0;
-        pic = pic.toUpperCase();
-        
-        for (int i = 0; i < pic.length(); i++) {
-            char c = pic.charAt(i);
-            
-            if (c == '(') {
-                int pos = pic.indexOf(')', i);
-                int times = Integer.parseInt(pic.substring(i + 1, pos));
-                i = pos;
-                position += times;
-            } else if (c == 'V') {
-                return length - position;
-            }
-        }
-        
-        return 0;
-    }
-    
-    public Data parse(byte[] bytes)
-    {
+    @Override
+    public Data parse(byte[] bytes) {
         String s = getString(bytes);
         
         char sign;
@@ -81,34 +43,33 @@ public class SignedSeparate extends SignedNumeric {
             sign = s.charAt(s.length() - 1);
             s = sign + s.substring(0, s.length() - 1);
         } else {
-            throw new IllegalStateException();
+            throw new IllegalStateException("undefined sign position");
         }
         
-        if (sign != '+' && sign != '-') throw new IllegalArgumentException(getName() + " is sign separate "
+        if (sign != '+' && sign != '-') {
+        	throw new IllegalArgumentException(getName() + " is sign separate "
             + (getSignPosition() == SignPosition.LEADING ? "leading" : "trailing") + " but no sign was found on value " + s);
+        }
         
-        if (sign == '+') s = s.substring(1);
+        if (sign == '+') {
+        	s = s.substring(1);
+        }
 
         BigInteger big = new BigInteger(s);
         Data data = create();
         
         if (data instanceof DecimalData) {
             DecimalData dData = (DecimalData) data;
-            
             dData.setValue(new BigDecimal(big, decimalPlaces()));
-            
-            return data;
         } else {
             IntegerData iData = (IntegerData) data;
-            
             iData.setValue(big);
-            
-            return data;
         }
+        return data;
     }
     
-    public byte[] toBytes(Object data)
-    {
+    @Override
+    public byte[] toBytes(Object data) {
         String s;
         boolean positive;
         
@@ -117,37 +78,29 @@ public class SignedSeparate extends SignedNumeric {
             s = "";
         } else {
             BigInteger bigI = getUnscaled(data);
-        
             positive = BigDecimal.ZERO.unscaledValue().compareTo(bigI) < 0;
-            
             s = bigI.toString();
         }
         
         char sign = positive ? '+' : '-';
-        
-//        s = getValue().fillString(s, getLength() - 1, Value.LEFT);
-        
         byte[] temp = getValue().fill(getBytes(s), getLength() - 1, Value.LEFT);
-        
         byte[] output = new byte[getLength()];
         
         if (getSignPosition() == SignPosition.TRAILING) {
-//            s += sign;
             System.arraycopy(temp, 0, output, 0, temp.length);
             output[output.length - 1] = (byte) sign;
         } else if (getSignPosition() == SignPosition.LEADING) {
-//            s = sign + s;
             System.arraycopy(temp, 0, output, 1, temp.length);
             output[0] = (byte) sign;
         } else {
-            throw new IllegalStateException();
+            throw new IllegalStateException("undefined sign position");
         }
         
         return output;
     }
 
-    public int digits()
-    {
+    @Override
+    public int digits() {
         return getLength() - 1;
     }
 }

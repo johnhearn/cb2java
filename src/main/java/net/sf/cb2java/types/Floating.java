@@ -31,58 +31,53 @@ import net.sf.cb2java.data.FloatingData;
  * 
  * @author Matt Watson
  */
-public class Floating extends Leaf
-{
+public class Floating extends Leaf {
+	
     /** the precision of the number */
     private final Precision precision;
     /** the conversion object for interpreting the bytes */
     private final Conversion conversion;
     
-    public Floating(String name, int level, int occurs, Precision precision)
-    {
+    public Floating(String name, int level, int occurs, Precision precision) {
         super(name, level, occurs);
         
         this.precision = precision;
-        
-        Conversion temp;
-        
+        this.conversion = getConversion();
+    }
+
+    private Conversion getConversion() {
 		try {
 			Class<?> clazz = Class.forName(getSettings().getFloatConversion());
-	        temp = (Conversion) clazz.newInstance();
+	        return (Conversion) clazz.newInstance();
 		} catch (ClassNotFoundException | IllegalAccessException | InstantiationException e1) {
-            temp = new IEEE754();
+            return new IEEE754();
         }
-        
-        conversion = temp;
     }
     
     @Override
-    public Value getValue()
-    {
+    public Value getValue() {
         return super.getValue() == null ? getSettings().getValues().ZEROS : super.getValue();
     }
 
-    public int getLength()
-    {
+    @Override
+    public int getLength() {
         return precision.bytes;
     }
 
-    public Data create()
-    {
+    @Override
+    public Data create() {
         return new FloatingData(this);
     }
 
-    public Data parse(byte[] input)
-    {
+    @Override
+    public Data parse(byte[] input) {
         FloatingData data = (FloatingData) create();
-        
         data.setValue(conversion.fromBytes(input, precision));
-        
         return data;
     }
 
-    public void validate(Object data) throws IllegalArgumentException
-    {
+    @Override
+    public void validate(Object data) throws IllegalArgumentException {
         if (!(data instanceof BigDecimal)) {
             throw new IllegalArgumentException("only BigDecimal is supported");
         }
@@ -90,9 +85,8 @@ public class Floating extends Leaf
         conversion.validate((BigDecimal) data, precision);
     }
 
-    public byte[] toBytes(Object data)
-    {
-//        System.out.println("float:" + data);
+    @Override
+    public byte[] toBytes(Object data) {
         return conversion.toBytes((BigDecimal) data, precision);
     }
 }
