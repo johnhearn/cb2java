@@ -9,10 +9,6 @@ import net.sf.cb2java.data.Data;
 
 public class DecimalTest extends TestCase {
 
-	protected void setUp() throws Exception {
-		super.setUp();
-	}
-
 	public void testParse() throws UnsupportedEncodingException {
 		assertEquals(new BigInteger("9050"), parse("9(4)", "9050"));
 		assertEquals(new BigInteger("-9050"), parse("S9(4)", "905}"));
@@ -23,7 +19,7 @@ public class DecimalTest extends TestCase {
 	}
 
 	protected Object parse(String pic, String string) throws UnsupportedEncodingException {
-		Decimal decimal = new Decimal("DUMMY", 0, 1, pic);
+		Decimal decimal = new Decimal("DUMMY", 0, 1, pic, SignPosition.TRAILING);
 		Data data = decimal.parse(string.getBytes("cp1252"));
 		Object value = data.getValue();
 		return value;

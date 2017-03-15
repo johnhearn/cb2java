@@ -30,8 +30,7 @@ import net.sf.cb2java.data.GroupData;
 import net.sf.cb2java.data.Record;
 import net.sf.cb2java.types.Element;
 import net.sf.cb2java.types.Group;
-import net.sf.cb2java.types.Numeric;
-import net.sf.cb2java.types.Numeric.Position;
+import net.sf.cb2java.types.SignPosition;
 
 /**
  * Represents a copybook data definition in memory
@@ -46,7 +45,7 @@ public class Copybook extends Group implements Settings
     private String encoding = Settings.DEFAULT.getEncoding();
     private boolean littleEndian = Settings.DEFAULT.getLittleEndian();
     private String floatConversion = Settings.DEFAULT.getFloatConversion();
-    private Numeric.Position signPosition = Settings.DEFAULT.getSignPosition();
+    private SignPosition signPosition = Settings.DEFAULT.getSignPosition();
     
     private Map<String, Element> redefines = new HashMap<String, Element>();
     
@@ -169,12 +168,12 @@ public class Copybook extends Group implements Settings
         return floatConversion;
     }
     
-    public void getSignPosition(Position position)
+    public void setSignPosition(SignPosition position)
     {
         this.signPosition = position;
     }
     
-    public Position getSignPosition()
+    public SignPosition getSignPosition()
     {
         return signPosition;
     }

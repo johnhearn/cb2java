@@ -25,13 +25,13 @@ import net.sf.cb2java.data.Data;
 import net.sf.cb2java.data.DecimalData;
 import net.sf.cb2java.data.IntegerData;
 
-public class SignedSeparate extends Numeric
+public class SignedSeparate extends SignedNumeric
 {
     private static final String BUG_TEXT = "Caused only by bug. Please create bug report at cb2java at sourceforge.net";
     
-    public SignedSeparate(String name, int level, int occurs, String picture)
+    public SignedSeparate(String name, int level, int occurs, String picture, SignPosition signPosition)
     {
-        super(name, level, occurs, picture);
+        super(name, level, occurs, picture, signPosition);
     }
     
     public static int getLength(String pic)
@@ -79,9 +79,9 @@ public class SignedSeparate extends Numeric
         
         char sign;
         
-        if (getSignPosition() == LEADING) {
+        if (getSignPosition() == SignPosition.LEADING) {
             sign = s.charAt(0);
-        } else if (getSignPosition() == TRAILING) {
+        } else if (getSignPosition() == SignPosition.TRAILING) {
             sign = s.charAt(s.length() - 1);
             s = sign + s.substring(0, s.length() - 1);
         } else {
@@ -89,7 +89,7 @@ public class SignedSeparate extends Numeric
         }
         
         if (sign != '+' && sign != '-') throw new IllegalArgumentException(getName() + " is sign separate "
-            + (getSignPosition() == LEADING ? "leading" : "trailing") + " but no sign was found on value " + s);
+            + (getSignPosition() == SignPosition.LEADING ? "leading" : "trailing") + " but no sign was found on value " + s);
         
         if (sign == '+') s = s.substring(1);
 
@@ -135,11 +135,11 @@ public class SignedSeparate extends Numeric
         
         byte[] output = new byte[getLength()];
         
-        if (getSignPosition() == TRAILING) {
+        if (getSignPosition() == SignPosition.TRAILING) {
 //            s += sign;
             System.arraycopy(temp, 0, output, 0, temp.length);
             output[output.length - 1] = (byte) sign;
-        } else if (getSignPosition() == LEADING) {
+        } else if (getSignPosition() == SignPosition.LEADING) {
 //            s = sign + s;
             System.arraycopy(temp, 0, output, 1, temp.length);
             output[0] = (byte) sign;

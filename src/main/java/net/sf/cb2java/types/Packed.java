@@ -24,15 +24,15 @@ import net.sf.cb2java.data.Data;
 import net.sf.cb2java.data.DecimalData;
 import net.sf.cb2java.data.IntegerData;
 
-public class Packed extends Numeric
+public class Packed extends SignedNumeric
 {
     private static final BigInteger TEN = BigInteger.valueOf(10);
     private final int digits;
     private final int length;
 
-    public Packed(String name, int level, int occurs, String picture)
+    public Packed(String name, int level, int occurs, String picture, SignPosition signPosition)
     {
-        super(name, level, occurs, picture);
+        super(name, level, occurs, picture, signPosition);
         digits = super.getLength();
         length = getLength(digits);
     }

@@ -33,10 +33,6 @@ import net.sf.cb2java.data.IntegerData;
  */
 public abstract class Numeric extends Leaf
 {
-    public static final Position LEADING = new Position();
-    public static final Position TRAILING = new Position();
- 
-    private Position position = getSettings().getSignPosition();
     private final int length;
     private final int decimalPlaces;
     private final boolean signed;
@@ -49,16 +45,6 @@ public abstract class Numeric extends Leaf
         this.length = getLength(picture);
         this.decimalPlaces = getScale(picture);
         this.signed = isSigned(picture);
-    }
-    
-    public void setSignPosition(Position position)
-    {	// TODO remove this method and pass as constructor arg.
-        this.position = position;
-    }
-    
-    public Position getSignPosition()
-    {
-        return position;
     }
     
     public static boolean isSigned(String picture)
@@ -259,8 +245,4 @@ public abstract class Numeric extends Leaf
 		return picture;
 	}
 
-	public static class Position
-    {
-        private Position(){}
-    }
 }

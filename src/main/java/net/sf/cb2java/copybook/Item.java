@@ -30,8 +30,8 @@ import net.sf.cb2java.types.Decimal;
 import net.sf.cb2java.types.Element;
 import net.sf.cb2java.types.Floating;
 import net.sf.cb2java.types.Group;
-import net.sf.cb2java.types.Numeric;
 import net.sf.cb2java.types.Packed;
+import net.sf.cb2java.types.SignPosition;
 import net.sf.cb2java.types.SignedSeparate;
 
 /**
@@ -66,7 +66,7 @@ class Item
     
     boolean isAlpha;
     boolean signSeparate;
-    SignedSeparate.Position signPosition = Settings.DEFAULT.getSignPosition();
+    SignPosition signPosition = Settings.DEFAULT.getSignPosition();
     
     String picture;
     Value value;
@@ -148,20 +148,17 @@ class Item
     
     private void createPacked()
     {
-        element = new Packed(name, level, occurs, picture);
-        ((Numeric) element).setSignPosition(signPosition);
+        element = new Packed(name, level, occurs, picture, signPosition);
     }
     
     private void createSignedSeparate()
     {
-        element = new SignedSeparate(name, level, occurs, picture);
-        ((Numeric) element).setSignPosition(signPosition);
+        element = new SignedSeparate(name, level, occurs, picture, signPosition);
     }
     
     private void createDecimal()
     {
-        element = new Decimal(name, level, occurs, picture);
-        ((Numeric) element).setSignPosition(signPosition);
+        element = new Decimal(name, level, occurs, picture, signPosition);
     }
     
     private void createAlphaNumeric()

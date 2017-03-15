@@ -21,8 +21,7 @@ package net.sf.cb2java;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
-import net.sf.cb2java.types.Numeric;
-import net.sf.cb2java.types.Numeric.Position;
+import net.sf.cb2java.types.SignPosition;
 
 public interface Settings {
 	static Settings DEFAULT = new Default();
@@ -35,7 +34,7 @@ public interface Settings {
 
 	String getFloatConversion();
 
-	Numeric.Position getSignPosition();
+	SignPosition getSignPosition();
 
 	int getColumnStart();
 
@@ -45,7 +44,7 @@ public interface Settings {
 		private static final String DEFAULT_ENCODING;
 		private static final boolean DEFAULT_LITTLE_ENDIAN;
 		private static final String DEFAULT_FLOAT_CONVERSION;
-		private static final Numeric.Position DEFAULT_SIGN_POSITION;
+		private static final SignPosition DEFAULT_SIGN_POSITION;
 		private static final Values DEFAULT_VALUES = new Values();
 		private static final int DEFAULT_COLUMN_START;
 		private static final int DEFAULT_COLUMN_END;
@@ -69,7 +68,7 @@ public interface Settings {
 			DEFAULT_FLOAT_CONVERSION = getSetting("float-conversion", "net.sf.cb2java.copybook.floating.IEEE754",
 					props);
 			DEFAULT_SIGN_POSITION = "leading".equalsIgnoreCase(getSetting("default-sign-position", "trailing", props))
-					? Numeric.LEADING : Numeric.TRAILING;
+					? SignPosition.LEADING : SignPosition.TRAILING;
 			DEFAULT_COLUMN_START = Integer.parseInt(getSetting("column.start", "6", props));
 			DEFAULT_COLUMN_END = Integer.parseInt(getSetting("column.end", "72", props));
 		}
@@ -100,7 +99,7 @@ public interface Settings {
 			return DEFAULT_VALUES;
 		}
 
-		public Position getSignPosition() {
+		public SignPosition getSignPosition() {
 			return DEFAULT_SIGN_POSITION;
 		}
 

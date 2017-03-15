@@ -30,11 +30,11 @@ import net.sf.cb2java.data.IntegerData;
  *
  * @author James Watson
  */
-public class Decimal extends Numeric
+public class Decimal extends SignedNumeric
 {
-    public Decimal(String name, int level, int occurs, String picture)
+    public Decimal(String name, int level, int occurs, String picture, SignPosition signPosition)
     {
-        super(name, level, occurs, picture);
+        super(name, level, occurs, picture, signPosition);
     }
     
     /**
@@ -196,7 +196,7 @@ public class Decimal extends Numeric
         if (input.length() < 1) {
             s = null;
         } else if (signed()) {
-        	if (getSignPosition() == LEADING) {
+        	if (getSignPosition() == SignPosition.LEADING) {
 	            char c = input.charAt(0); 
 	            s = (isPositive(c) ? "" : "-") + getNumber(c) 
 	                + (input.length() > 1 ? input.substring(1) : ""); 
@@ -244,7 +244,7 @@ public class Decimal extends Numeric
         
         byte[] output = getValue().fill(getBytes(bigI.toString()), getLength(), Value.LEFT);
         
-        if (getSignPosition() == LEADING) {
+        if (getSignPosition() == SignPosition.LEADING) {
             output[0] = (byte) getChar(positive, (char) output[0]);
         } else {
             int last = output.length - 1;

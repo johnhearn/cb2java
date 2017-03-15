@@ -25,7 +25,7 @@ import java.util.StringTokenizer;
 import net.sf.cb2java.Values;
 import net.sf.cb2java.types.Element;
 import net.sf.cb2java.types.Group;
-import net.sf.cb2java.types.SignedSeparate;
+import net.sf.cb2java.types.SignPosition;
 import net.sf.cb2xml.sablecc.analysis.DepthFirstAdapter;
 import net.sf.cb2xml.sablecc.node.ABinaryUsagePhrase;
 import net.sf.cb2xml.sablecc.node.AComp1UsagePhrase;
@@ -265,12 +265,12 @@ class CopybookAnalyzer extends DepthFirstAdapter
 
 	public void inALeadingLeadingOrTrailing(ALeadingLeadingOrTrailing node)
     {
-        current.signPosition = SignedSeparate.LEADING;
+        current.signPosition = SignPosition.LEADING;
     }
 
     public void inATrailimngLeadingOrTrailing(ALeadingLeadingOrTrailing node)
     {
-        current.signPosition = SignedSeparate.TRAILING;
+        current.signPosition = SignPosition.TRAILING;
     }
 
 	//======================= USAGE CLAUSE ==========================
