@@ -1,8 +1,9 @@
 package net.sf.cb2java.types;
 
+import junit.framework.TestCase;
 import net.sf.cb2java.Settings;
 import net.sf.cb2java.Values;
-import junit.framework.TestCase;
+import net.sf.cb2java.data.CharData;
 
 public class AlphaNumericTest extends TestCase {
 
@@ -51,6 +52,18 @@ public class AlphaNumericTest extends TestCase {
 		}
 		assertNotNull(ex);
 		assertEquals("character [Z] not allowed.", ex.getMessage());
+	}
+	
+	public void testCharData() {
+		AlphaNumeric cut = createTestObject("X(10)");
+		CharData data = (CharData)cut.create();
+		assertEquals("", data.getValue());
+		data.setValue("  ");
+		assertEquals("", data.getValue());
+		data.setValue("foo bar  ", false);
+		assertEquals("foo bar", data.getValue());
+		data.setValue("  foo bar", true);
+		assertEquals("  foo bar", data.getValue());
 	}
 
 	protected AlphaNumeric createTestObject(String picture) {

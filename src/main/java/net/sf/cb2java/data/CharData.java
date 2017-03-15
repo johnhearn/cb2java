@@ -55,7 +55,9 @@ public class CharData extends ValueData {
      * @param data
      */
     public void setValue(String data, boolean validate) {
-        if (validate) validate(data);
+        if (validate) {
+        	validate(data);
+        }
         this.data = data;
     }
     

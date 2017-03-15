@@ -6,6 +6,8 @@ import java.math.BigInteger;
 
 import junit.framework.TestCase;
 import net.sf.cb2java.data.Data;
+import net.sf.cb2java.data.DecimalData;
+import net.sf.cb2java.data.IntegerData;
 
 public class DecimalTest extends TestCase {
 
@@ -23,5 +25,52 @@ public class DecimalTest extends TestCase {
 		Data data = decimal.parse(string.getBytes("cp1252"));
 		Object value = data.getValue();
 		return value;
+	}
+	
+	
+	public void testIntegerData() {
+		Decimal decimal = new Decimal("FILLER", 0, 1, "99", SignPosition.TRAILING);
+		Data dat = decimal.create();
+		assertTrue(dat instanceof IntegerData);
+		assertEquals(BigInteger.ZERO, dat.getValue());
+		IntegerData intDat = (IntegerData)dat;
+		assertEquals(0, intDat.getInt());
+		assertEquals(0, intDat.getLong());
+		
+		intDat.setValue(1l);
+		assertEquals(BigInteger.ONE, dat.getValue());
+		assertEquals(1, intDat.getInt());
+		assertEquals(1, intDat.getLong());
+		
+		intDat.setValue(BigDecimal.TEN);
+		assertEquals(10, intDat.getInt());
+	}
+	
+	public void testDecimalData() {
+		Decimal decimal = new Decimal("FILLER", 0, 1, "99V99", SignPosition.TRAILING);
+		Data dat = decimal.create();
+		assertNull(dat.getValue());
+		assertTrue(dat instanceof DecimalData);
+		
+		DecimalData decDat = (DecimalData)dat;
+		assertEquals(0.0f, decDat.getFloat());
+		assertEquals(0.0, decDat.getDouble());
+		
+		dat.setValue(BigDecimal.valueOf(12.34));
+		assertEquals(12.34f, decDat.getFloat());
+		assertEquals(12.34, decDat.getDouble());
+		
+		decDat.setRoundingMode(BigDecimal.ROUND_DOWN);
+		decDat.setValue(45.678);
+		assertEquals(45.67, decDat.getDouble());
+		
+		Exception ex = null;
+		try {
+			decDat.setValue(BigDecimal.valueOf(-12.34));
+			fail();
+		} catch (IllegalArgumentException e) {
+			ex = e;
+		}
+		assertNotNull(ex);
 	}
 }

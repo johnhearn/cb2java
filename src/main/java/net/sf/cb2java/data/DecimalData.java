@@ -71,7 +71,7 @@ public class DecimalData extends NumericData {
     
     public void setValue(BigDecimal data, boolean validate) {
         if (validate) {
-        	validate(data);
+            validate(data);
         }
         this.data = data;
     }
