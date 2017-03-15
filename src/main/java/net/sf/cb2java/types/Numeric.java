@@ -47,33 +47,12 @@ public abstract class Numeric extends Leaf
         super(name, level, occurs);
         this.setPicture(picture);
         this.length = getLength(picture);
-        this.decimalPlaces = getScale(picture, length);
+        this.decimalPlaces = getScale(picture);
         this.signed = isSigned(picture);
     }
     
-    protected Numeric(String name, int level, int occurs, final int length, final int decimalPlaces, final boolean signed)
-    {
-        super(name, level, occurs);
-        
-        this.length = length;
-        this.decimalPlaces = decimalPlaces;
-        this.signed = signed;
-    }
-    
-    protected Numeric(String name, int length, int decimalPlaces, boolean signed, Position position)
-    {
-        this(name, 0, 1, length, decimalPlaces, signed);
-        if (position != null) setSignPosition(position);
-    }
-    
-//    protected Numeric(int length, int decimalPlaces, boolean signed, Position position)
-//    {
-//        this("", length, decimalPlaces, signed, position);
-//        if (position != null) setSignPosition(position);
-//    }
-    
     public void setSignPosition(Position position)
-    {
+    {	// TODO remove this method and pass as constructor arg.
         this.position = position;
     }
     
@@ -110,7 +89,11 @@ public abstract class Numeric extends Leaf
         return length;
     }
     
-    public static int getScale(String pic, int length)
+    public static int getScale(String pic) {
+    	return getScale(pic, getLength(pic));
+    }
+    
+    private static int getScale(String pic, int length)
     {
         int position = 0;
         pic = pic.toUpperCase();
@@ -268,7 +251,7 @@ public abstract class Numeric extends Leaf
             + (cause == null ? "" : " " + cause.getMessage()));
     }
     
-    public void setPicture(String picture) {
+    private void setPicture(String picture) {
 		this.picture = picture;
 	}
 

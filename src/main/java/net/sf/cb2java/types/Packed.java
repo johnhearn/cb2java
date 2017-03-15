@@ -27,7 +27,6 @@ import net.sf.cb2java.data.IntegerData;
 public class Packed extends Numeric
 {
     private static final BigInteger TEN = BigInteger.valueOf(10);
-//    BigInteger ZERO = BigInteger.valueOf(0);
     private final int digits;
     private final int length;
 
@@ -36,44 +35,6 @@ public class Packed extends Numeric
         super(name, level, occurs, picture);
         digits = super.getLength();
         length = getLength(digits);
-    }
-
-    public Packed(String name, String picture)
-    {
-        this(name, 0, 1, picture);
-    }
-    
-    public Packed(String picture)
-    {
-        this("", 0, 1, picture);
-    }
-
-    public Packed(String name, int length, int decimalPlaces, boolean signed)
-    {
-        super(name, length, decimalPlaces, signed, null);
-        digits = super.getLength();
-        this.length = getLength(digits);
-    }
-    
-    public Packed(int length, int decimalPlaces, boolean signed)
-    {
-        super("", length, decimalPlaces, signed, null);
-        digits = super.getLength();
-        this.length = getLength(digits);
-    }
-
-    public Packed(String name, int length, int decimalPlaces, boolean signed, Position position)
-    {
-        super(name, length, decimalPlaces, signed, position);
-        digits = super.getLength();
-        this.length = getLength(digits);
-    }
-    
-    public Packed(int length, int decimalPlaces, boolean signed, Position position)
-    {
-        super("", length, decimalPlaces, signed, position);
-        digits = super.getLength();
-        this.length = getLength(digits);
     }
 
     protected static final int getLength(int digits)

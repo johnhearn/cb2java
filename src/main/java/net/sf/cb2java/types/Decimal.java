@@ -37,36 +37,6 @@ public class Decimal extends Numeric
         super(name, level, occurs, picture);
     }
     
-    public Decimal(String name, String picture)
-    {
-        super(name, 0, 1, picture);
-    }
-    
-    public Decimal(String picture)
-    {
-        super("", 0, 1, picture);
-    }
-    
-    public Decimal(String name, int length, int decimalPlaces, boolean signed)
-    {
-        super(name, length, decimalPlaces, signed, null);
-    }
-    
-    public Decimal(int length, int decimalPlaces, boolean signed)
-    {
-        super("", length, decimalPlaces, signed, null);
-    }
-    
-    public Decimal(String name, int length, int decimalPlaces, boolean signed, Position position)
-    {
-        super(name, length, decimalPlaces, signed, position);
-    }
-    
-    public Decimal(int length, int decimalPlaces, boolean signed, Position position)
-    {
-        super("", length, decimalPlaces, signed, position);
-    }
-    
     /**
      * returns the character for the given char representing a digit
      * in order to create an overpunched digit in a zoned number

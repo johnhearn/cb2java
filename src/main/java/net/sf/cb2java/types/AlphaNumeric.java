@@ -50,11 +50,6 @@ public class AlphaNumeric extends Characters
         this.pattern = Pattern.compile(buffer.toString());
     }
     
-    public AlphaNumeric(String pattern)
-    {
-        this("", 0, 1, pattern);
-    }
-    
     @Override
     public int getLength()
     {

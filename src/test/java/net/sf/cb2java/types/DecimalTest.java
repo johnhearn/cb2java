@@ -23,7 +23,7 @@ public class DecimalTest extends TestCase {
 	}
 
 	protected Object parse(String pic, String string) throws UnsupportedEncodingException {
-		Decimal decimal = new Decimal("DUMMY", pic);
+		Decimal decimal = new Decimal("DUMMY", 0, 1, pic);
 		Data data = decimal.parse(string.getBytes("cp1252"));
 		Object value = data.getValue();
 		return value;

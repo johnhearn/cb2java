@@ -34,36 +34,6 @@ public class SignedSeparate extends Numeric
         super(name, level, occurs, picture);
     }
     
-    public SignedSeparate(String name, String picture)
-    {
-        super(name, 0, 1, picture);
-    }
-    
-    public SignedSeparate(String picture)
-    {
-        super("", 0, 1, picture);
-    }
-    
-    public SignedSeparate(String name, int length, int decimalPlaces, boolean signed)
-    {
-        super(name, length, decimalPlaces, signed, null);
-    }
-    
-    public SignedSeparate(int length, int decimalPlaces, boolean signed)
-    {
-        super("", length, decimalPlaces, signed, null);
-    }
-    
-    public SignedSeparate(String name, int length, int decimalPlaces, boolean signed, Position position)
-    {
-        super(name, length, decimalPlaces, signed, position);
-    }
-    
-    public SignedSeparate(int length, int decimalPlaces, boolean signed, Position position)
-    {
-        super("", length, decimalPlaces, signed, position);
-    }
-    
     public static int getLength(String pic)
     {
         int length = 0;

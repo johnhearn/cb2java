@@ -56,19 +56,6 @@ public class Floating extends Leaf
         conversion = temp;
     }
     
-    public Floating(Precision precision)
-    {
-        this("", 0, 1, precision);
-    }
-    
-    public Floating(Precision precision, Conversion conversion)
-    {
-        super("", 0, 1);
-        
-        this.precision = precision;
-        this.conversion = conversion;
-    }
-
     @Override
     public Value getValue()
     {

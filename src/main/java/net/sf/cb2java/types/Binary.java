@@ -42,34 +42,6 @@ public class Binary extends Numeric
         length = getLength(digits);
     }
     
-    public Binary(String name, String picture)
-    {
-        super(name, 0, 1, picture);
-        digits = super.getLength();
-        length = getLength(digits);
-    }
-    
-    public Binary(String picture)
-    {
-        super("", 0, 1, picture);
-        digits = super.getLength();
-        length = getLength(digits);
-    }
-    
-    public Binary(String name, int length, int decimalPlaces, boolean signed)
-    {
-        super(name, length, decimalPlaces, signed, null);
-        digits = super.getLength();
-        this.length = getLength(digits);
-    }
-    
-    public Binary(int length, int decimalPlaces, boolean signed)
-    {
-        super("", length, decimalPlaces, signed, null);
-        digits = super.getLength();
-        this.length = getLength(digits);
-    }
-    
     protected static final int getLength(int digits)
     {   
         if (1 <= digits && digits <= 4) {
@@ -172,26 +144,6 @@ public class Binary extends Numeric
         public Native(String name, int level, int occurs, String picture)
         {
             super(name, level, occurs, picture);
-        }
-        
-        public Native(String name, String picture)
-        {
-            super(name, 0, 1, picture);
-        }
-        
-        public Native(String picture)
-        {
-            super("", 0, 1, picture);
-        }
-
-        public Native(String name, int length, int decimalPlaces, boolean signed)
-        {
-            super(name, length, decimalPlaces, signed);
-        }
-        
-        public Native(int length, int decimalPlaces, boolean signed)
-        {
-            super("", length, decimalPlaces, signed);
         }
         
         @Override
