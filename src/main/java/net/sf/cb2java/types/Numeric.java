@@ -38,8 +38,7 @@ public abstract class Numeric extends Leaf
     private final boolean signed;
     private String picture;
     
-    protected Numeric(String name, int level, int occurs, final String picture)
-    {
+    protected Numeric(String name, int level, int occurs, final String picture) {
         super(name, level, occurs);
         this.setPicture(picture);
         this.length = getLength(picture);
@@ -47,8 +46,7 @@ public abstract class Numeric extends Leaf
         this.signed = isSigned(picture);
     }
     
-    public static boolean isSigned(String picture)
-    {
+    private static boolean isSigned(String picture) {
         return picture.charAt(0) == 'S';
     }
     
@@ -76,7 +74,12 @@ public abstract class Numeric extends Leaf
     }
     
     public static int getScale(String pic) {
-    	return getScale(pic, getLength(pic));
+    	int vPos = pic.indexOf("V");
+    	if (vPos < 0) {
+    		return 0;
+    	} else {
+    		return getLength(pic.substring(vPos));
+    	}
     }
     
     private static int getScale(String pic, int length)
