@@ -252,19 +252,20 @@
                 <role>developer</role>
             </roles>
         </developer>
+        <developer>
+        	<id>BertKoor</id>
+            <name>Bert Koorengevel</name>
+            <url>https://github.com/bertkoor</url>
+            <roles>
+                <role>developer</role>
+            </roles>
+        </developer>
     </developers>
 
     <contributors>
         <contributor>
             <name>Enrico Comiti</name>
             <url>https://github.com/enr</url>
-            <roles>
-                <role>contributor</role>
-            </roles>
-        </contributor>
-        <contributor>
-            <name>Bert Koorengevel</name>
-            <url>https://github.com/bertkoor</url>
             <roles>
                 <role>contributor</role>
             </roles>
