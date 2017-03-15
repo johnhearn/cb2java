@@ -25,17 +25,13 @@ import net.sf.cb2java.data.Data;
 import net.sf.cb2java.data.DecimalData;
 import net.sf.cb2java.data.IntegerData;
 
-public class SignedSeparate extends SignedNumeric
-{
-    private static final String BUG_TEXT = "Caused only by bug. Please create bug report at cb2java at sourceforge.net";
+public class SignedSeparate extends SignedNumeric {
     
-    public SignedSeparate(String name, int level, int occurs, String picture, SignPosition signPosition)
-    {
+    public SignedSeparate(String name, int level, int occurs, String picture, SignPosition signPosition) {
         super(name, level, occurs, picture, signPosition);
     }
     
-    public static int getLength(String pic)
-    {
+    public static int getLength(String pic) {
         int length = 0;
         
         for (int i = 0; i < pic.length(); i++) {
@@ -85,7 +81,7 @@ public class SignedSeparate extends SignedNumeric
             sign = s.charAt(s.length() - 1);
             s = sign + s.substring(0, s.length() - 1);
         } else {
-            throw new RuntimeException(BUG_TEXT);
+            throw new IllegalStateException();
         }
         
         if (sign != '+' && sign != '-') throw new IllegalArgumentException(getName() + " is sign separate "
@@ -144,7 +140,7 @@ public class SignedSeparate extends SignedNumeric
             System.arraycopy(temp, 0, output, 1, temp.length);
             output[0] = (byte) sign;
         } else {
-            throw new RuntimeException(BUG_TEXT);
+            throw new IllegalStateException();
         }
         
         return output;

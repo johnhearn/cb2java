@@ -200,11 +200,13 @@ public class Decimal extends SignedNumeric
 	            char c = input.charAt(0); 
 	            s = (isPositive(c) ? "" : "-") + getNumber(c) 
 	                + (input.length() > 1 ? input.substring(1) : ""); 
-	        } else {
+	        } else if (getSignPosition() == SignPosition.TRAILING) {
 	            int last = input.length() - 1; 
 	            char c = input.charAt(last); 
 	            s = (isPositive(c) ? "" : "-") 
 	                + (input.length() > 1 ? input.substring(0, last) : "") + getNumber(c);
+	        } else {
+	        	throw new IllegalStateException();
 	        }
         }        
         BigInteger big = s == null ? null : new BigInteger(s);
@@ -246,9 +248,11 @@ public class Decimal extends SignedNumeric
         
         if (getSignPosition() == SignPosition.LEADING) {
             output[0] = (byte) getChar(positive, (char) output[0]);
-        } else {
+        } else if (getSignPosition() == SignPosition.TRAILING) {
             int last = output.length - 1;
             output[last] = (byte) getChar(positive, (char) output[last]);
+        } else {
+        	throw new IllegalStateException();
         }
         
         return output;

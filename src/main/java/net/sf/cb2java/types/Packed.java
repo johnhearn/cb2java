@@ -144,15 +144,7 @@ public class Packed extends SignedNumeric
             bigI = getUnscaled(data);
         }
 
-        // System.out.println(data);
-
-        byte signNibble;
-
-        if (signed()) {
-            signNibble = (byte) (bigI.compareTo(BigInteger.ZERO) < 0 ? 0x0D : 0x0C);
-        } else {
-            signNibble = 0x0F;
-        }
+        byte signNibble = signed() ? (byte) (bigI.compareTo(BigInteger.ZERO) < 0 ? 0x0D : 0x0C) : 0x0F;
 
         byte[] bytes = new byte[getLength()];
 
