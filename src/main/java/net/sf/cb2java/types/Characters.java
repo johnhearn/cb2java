@@ -72,7 +72,7 @@ public class Characters extends Leaf {
 
     @Override
     public Value getValue() {
-    	Value result = super.getValue();
+        Value result = super.getValue();
         return result == null ? getSettings().getValues().SPACES : result;
     }
 }

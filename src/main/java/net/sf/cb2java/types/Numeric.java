@@ -159,7 +159,8 @@ public abstract class Numeric extends Leaf {
     
     @Override
     public Value getValue() {
-        return super.getValue() == null ? getSettings().getValues().ZEROS : super.getValue();
+        Value result = super.getValue();
+        return result == null ? getSettings().getValues().ZEROES : result;
     }
     
     protected BigInteger getUnscaled(Object data) {

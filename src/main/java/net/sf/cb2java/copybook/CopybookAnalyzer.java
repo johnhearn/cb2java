@@ -338,7 +338,7 @@ class CopybookAnalyzer extends DepthFirstAdapter
 	//	======================= 88 / VALUE CLAUSE ==========================
 	
 	public void caseTZeros(TZeros node) {
-		current.value = values.ZEROS;
+		current.value = values.ZEROES;
 	}
 	
 	public void caseTSpaces(TSpaces node) {

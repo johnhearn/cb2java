@@ -35,7 +35,7 @@ public class Values
         try {
             ((StringBasedValue) SPACES).bite = " ".getBytes(encoding)[0];
             ((StringBasedValue) QUOTES).bite = "\"".getBytes(encoding)[0];
-            ((StringBasedValue) ZEROS).bite = "0".getBytes(encoding)[0];
+            ((StringBasedValue) ZEROES).bite = "0".getBytes(encoding)[0];
         } catch (UnsupportedEncodingException e) {
             throw new RuntimeException(e);
         }
@@ -106,7 +106,7 @@ public class Values
         }
     };
     
-    public final Value ZEROS = new StringBasedValue(Values.this);
+    public final Value ZEROES = new StringBasedValue(Values.this);
     
     public final Value QUOTES = new StringBasedValue(Values.this);
     
