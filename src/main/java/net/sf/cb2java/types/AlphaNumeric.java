@@ -97,10 +97,12 @@ public class AlphaNumeric extends Characters {
         	return;
         }
         
-        String s = (String) data;
+        String value = (String)data;
+        int len = Math.max(value.length(), this.getLength());
+        String filledValue = this.getValue().fillString(value, len, Value.RIGHT);
         
-        if (!pattern.matcher(getValue().fillString(s, getLength(), Value.RIGHT)).matches()) {
-            throw new IllegalArgumentException(data + " does not match pattern '" + originalPattern
+        if (!pattern.matcher(filledValue).matches()) {
+            throw new IllegalArgumentException("'" + value + "' does not match pattern '" + originalPattern
                 + "' specified for " + getName());
         }
     }

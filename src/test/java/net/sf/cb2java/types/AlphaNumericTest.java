@@ -1,19 +1,16 @@
 package net.sf.cb2java.types;
 
 import junit.framework.TestCase;
-import net.sf.cb2java.Settings;
-import net.sf.cb2java.Values;
-import net.sf.cb2java.data.CharData;
 
 public class AlphaNumericTest extends TestCase {
 
 	public void testValidateNull() {
-		AlphaNumeric cut = createTestObject("X(100)");
+		AlphaNumeric cut = createField("X(100)");
 		cut.validate(null);
 	}
 	
 	public void testValidateA100() {
-		AlphaNumeric cut = createTestObject("A(100)");
+		AlphaNumeric cut = createField("A(100)");
 		cut.validate("Lorem ipsum dolor sit amet");
 		
 		Exception ex = null;
@@ -29,7 +26,7 @@ public class AlphaNumericTest extends TestCase {
 	public void testValidateX100WithCarriageReturn() {
 		Exception ex = null;
 		try {
-			AlphaNumeric cut = createTestObject("X(100)");
+			AlphaNumeric cut = createField("X(100)");
 			cut.validate("Lorem ipsum \n dolor sit amet");
 			fail("AlphaNumeric does not currently allow carriage return characters.");
 		} catch (IllegalArgumentException e) {
@@ -45,7 +42,7 @@ public class AlphaNumericTest extends TestCase {
 	public void testIllegalPicture() {
 		Exception ex = null;
 		try {
-			createTestObject("XA9Z");
+			createField("XA9Z");
 			fail("AlphaNumeric should not accept pic Z.");
 		} catch (IllegalArgumentException e) {
 			ex = e;
@@ -54,25 +51,8 @@ public class AlphaNumericTest extends TestCase {
 		assertEquals("character [Z] not allowed.", ex.getMessage());
 	}
 	
-	public void testCharData() {
-		AlphaNumeric cut = createTestObject("X(10)");
-		CharData data = (CharData)cut.create();
-		assertEquals("", data.getValue());
-		data.setValue("  ");
-		assertEquals("", data.getValue());
-		data.setValue("foo bar  ", false);
-		assertEquals("foo bar", data.getValue());
-		data.setValue("  foo bar", true);
-		assertEquals("  foo bar", data.getValue());
-	}
-
-	protected AlphaNumeric createTestObject(String picture) {
-		AlphaNumeric cut = new AlphaNumeric("DATA-ITEM", 5, 0, picture);
-		
-		Values values = Settings.DEFAULT.getValues();
-		values.setEncoding(Settings.DEFAULT.getEncoding());
-		cut.setValue(values.SPACES);
-		return cut;
+	private AlphaNumeric createField(String picture) {
+		return new AlphaNumeric("DATA-ITEM", 5, 0, picture);
 	}
 
 }
