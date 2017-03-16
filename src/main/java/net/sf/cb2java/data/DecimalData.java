@@ -23,8 +23,8 @@ import net.sf.cb2java.types.Numeric;
 
 public class DecimalData extends NumericData {
 	
-    private int roundingMode = BigDecimal.ROUND_HALF_UP;
     private BigDecimal data;
+    private int roundingMode = BigDecimal.ROUND_HALF_UP;
     
     public DecimalData(final Numeric definition) {
         super(definition);
@@ -46,6 +46,11 @@ public class DecimalData extends NumericData {
         return data;
     }
     
+    @Override
+    protected void setValueImpl(Object data) {
+        setValue((BigDecimal) data, true);
+    }
+    
     /**
      * sets the value of this data object with the given floating
      * point number.  Rounds the value to the decimalPlaces specified
@@ -53,20 +58,12 @@ public class DecimalData extends NumericData {
      * 
      * @param data the value to set this Object to
      */
-    public void setValue(double data) {
-        BigDecimal temp = new BigDecimal(data);
-        temp = temp.setScale(((Numeric) getDefinition()).decimalPlaces(), roundingMode);
+    public void setValue(double data, boolean validate) {
+        BigDecimal value = new BigDecimal(data);
+        int decPlaces = ((Numeric) getDefinition()).decimalPlaces();
+        value = value.setScale(decPlaces, roundingMode);
         
-        setValue(temp, true);
-    }
-    
-    @Override
-    protected void setValueImpl(Object data) {
-        setValue((BigDecimal) data, false);
-    }
-    
-    public void setValue(BigDecimal data) {
-        setValue(data, true);
+        setValue(value, validate);
     }
     
     public void setValue(BigDecimal data, boolean validate) {

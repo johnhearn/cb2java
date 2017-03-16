@@ -60,16 +60,12 @@ public class FloatingData extends ValueData {
     
     @Override
     public void setValueImpl(Object data) {
-        setValue((BigDecimal) data, false);
+        setValue((BigDecimal) data, true);
     }
 
-    public void setValue(BigDecimal data) {
-        setValue(data, true);
-    }
-    
-    private void setValue(BigDecimal data, boolean validate) { 
+    public void setValue(BigDecimal data, boolean validate) { 
         if (validate) {
-        	validate(data);
+            validate(data);
         }
         this.data = data;
     }

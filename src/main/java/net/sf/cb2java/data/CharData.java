@@ -47,7 +47,7 @@ public class CharData extends ValueData {
     
     @Override
     protected void setValueImpl(Object data) {
-        setValue((String) data, false);
+        setValue((String) data, true);
     }
     
     /**
@@ -56,7 +56,7 @@ public class CharData extends ValueData {
      */
     public void setValue(String data, boolean validate) {
         if (validate) {
-        	validate(data);
+            validate(data);
         }
         this.data = data;
     }

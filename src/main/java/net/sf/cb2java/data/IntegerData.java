@@ -30,7 +30,7 @@ import net.sf.cb2java.types.Numeric;
  */
 public class IntegerData extends NumericData {
 	
-    public BigInteger data;
+    private BigInteger data;
     
     public IntegerData(Numeric definition) {
         super(definition);
@@ -48,22 +48,20 @@ public class IntegerData extends NumericData {
         return data == null ? BigInteger.ZERO : data;
     }
     
-    public void setValue(long data) {
-        BigInteger temp = BigInteger.valueOf(data);
-        setValue(temp, true);
-    }
-    
     @Override
     protected void setValueImpl(Object data) {
-        setValue(((BigDecimal) data).toBigInteger(), false);
+        setValue(((BigDecimal) data).toBigInteger(), true);
     }
     
-    public void setValue(BigInteger data) {
-        setValue(data, true);
+    public void setValue(long data, boolean validate) {
+        BigInteger temp = BigInteger.valueOf(data);
+        setValue(temp, validate);
     }
-
+    
     public void setValue(BigInteger data, boolean validate) {
-        if (validate) validate(data);
+        if (validate) {
+            validate(data);
+        }
         this.data = data;
     }
     

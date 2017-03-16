@@ -81,15 +81,14 @@ public abstract class Data {
     
     /**
      * Sets the internal value of this item.  If the data is not
-     * compatible with this type, an Exception will be thrown.  See
-     * the documentation of the specific subtypes for a list of 
+     * compatible or valid with this type, an Exception will be thrown.
+     * See the documentation of the specific subtypes for a list of 
      * acceptable types and other rules for valid input.
      * 
-     * @param data the data to set.  Must be compatible with the
-     * the instance.
+     * @param data the data to set.  Must be compatible and valid 
+     * with the instance.
      */
     public final void setValue(Object data) {
-        //TODO call validate(data) depending on a setting?
         setValueImpl(data);
     }
     
