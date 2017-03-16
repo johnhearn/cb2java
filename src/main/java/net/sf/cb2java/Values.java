@@ -19,17 +19,22 @@
 package net.sf.cb2java;
 
 import java.io.UnsupportedEncodingException;
+import java.nio.ByteBuffer;
+import java.nio.charset.Charset;
+import java.nio.charset.UnsupportedCharsetException;
 
-public class Values
-{
+public class Values {
+	
     private String encoding;
     
-    public Values()
-    {
+    public Values() {
+        ((StringBasedValue) SPACES).bite = ' ';
+        ((StringBasedValue) QUOTES).bite = '"';
+        ((StringBasedValue) ZEROES).bite = '0';
     }
     
-    public void setEncoding(String encoding)
-    {
+    public void setEncoding(String encoding) {
+    	testEncoding(encoding);
         this.encoding = encoding;
         
         try {
@@ -37,12 +42,25 @@ public class Values
             ((StringBasedValue) QUOTES).bite = "\"".getBytes(encoding)[0];
             ((StringBasedValue) ZEROES).bite = "0".getBytes(encoding)[0];
         } catch (UnsupportedEncodingException e) {
-            throw new RuntimeException(e);
+            throw new UnsupportedCharsetException(encoding);
         }
     }
     
+    private static void testEncoding(String encoding) {
+    	String testString = "!/09?@ AZ[]`az/!|";
+    	Charset charset = Charset.forName(encoding);
+		ByteBuffer encoded = charset.encode(testString);
+		if (encoded.array().length != testString.length()) {
+			throw new UnsupportedCharsetException(encoding + " is not a single-byte encoding");
+		}
+		String decoded = charset.decode(encoded).toString();
+		if (!decoded.equals(testString)) {
+			throw new UnsupportedCharsetException(encoding + " recoded '" + testString + "' as '" + decoded + "'");
+		}
+    }
+    
     protected String getEncoding() {
-		return encoding;
+		return encoding == null ? "cp1252" : encoding;
 	}
     
     public class Literal extends Value
@@ -61,7 +79,7 @@ public class Values
             String s = value.length() > length ? value.substring(0, length) : value;
             
             try {
-                return s.getBytes(encoding);
+                return s.getBytes(this.getEncoding());
             } catch (UnsupportedEncodingException e) {
                 throw new RuntimeException(e);
             }
