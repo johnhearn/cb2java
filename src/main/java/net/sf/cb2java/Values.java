@@ -34,7 +34,7 @@ public class Values {
     }
     
     public void setEncoding(String encoding) {
-    	testEncoding(encoding);
+        testEncoding(encoding);
         this.encoding = encoding;
         
         try {
@@ -46,7 +46,7 @@ public class Values {
         }
     }
     
-    private static void testEncoding(String encoding) {
+    static void testEncoding(String encoding) {
     	String testString = "!/09?@ AZ[]`az/!|";
     	Charset charset = Charset.forName(encoding);
 		ByteBuffer encoded = charset.encode(testString);
