@@ -59,12 +59,12 @@ Include the JAR file in your Java project pom.xml:
     <dependency>
         <groupId>net.sf.cb2java</groupId>
         <artifactId>cb2java</artifactId>
-        <version>5.3</version>
+        <version>5.4.0</version>
     </dependency>
 
 or your [Leiningen](https://github.com/technomancy/leiningen) project.clj:
 
-    [net.sf.cb2java/cb2java "5.3"]
+    [net.sf.cb2java/cb2java "5.4.0"]
 
 
 Licence

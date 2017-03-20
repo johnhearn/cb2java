@@ -5,7 +5,7 @@
 
     <groupId>net.sf.cb2java</groupId>
     <artifactId>cb2java</artifactId>
-    <version>5.3.2-SNAPSHOT</version>
+    <version>5.4.0</version>
 
     <name>cb2java</name>
     <description>Library that allows dynamic access to Copybook structures at run-time from a Java application</description>
