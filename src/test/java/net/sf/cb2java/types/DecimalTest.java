@@ -20,7 +20,7 @@ public class DecimalTest extends TestCase {
 		assertEquals(new BigDecimal("1.23"), parse("S9(6)V99", "0000012C")); // Real example
 	}
 
-	protected Object parse(String pic, String string) throws UnsupportedEncodingException {
+	private Object parse(String pic, String string) throws UnsupportedEncodingException {
 		Decimal decimal = new Decimal("DUMMY", 0, 1, pic, SignPosition.TRAILING);
 		Data data = decimal.parse(string.getBytes("cp1252"));
 		Object value = data.getValue();
