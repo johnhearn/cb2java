@@ -37,7 +37,7 @@ public class DecimalTest extends TestCase {
 		assertEquals(0, intDat.getInt());
 		assertEquals(0, intDat.getLong());
 		
-		intDat.setValue(1l);
+		intDat.setValue(1l, true);
 		assertEquals(BigInteger.ONE, dat.getValue());
 		assertEquals(1, intDat.getInt());
 		assertEquals(1, intDat.getLong());
@@ -61,7 +61,7 @@ public class DecimalTest extends TestCase {
 		assertEquals(12.34, decDat.getDouble());
 		
 		decDat.setRoundingMode(BigDecimal.ROUND_DOWN);
-		decDat.setValue(45.678);
+		decDat.setValue(45.678, true);
 		assertEquals(45.67, decDat.getDouble());
 		
 		Exception ex = null;

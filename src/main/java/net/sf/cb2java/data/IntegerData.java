@@ -53,6 +53,10 @@ public class IntegerData extends NumericData {
         setValue(((BigDecimal) data).toBigInteger(), true);
     }
     
+    public void setValue(BigInteger data) {
+    	setValue(data, true);
+    }
+    
     public void setValue(long data, boolean validate) {
         BigInteger temp = BigInteger.valueOf(data);
         setValue(temp, validate);
