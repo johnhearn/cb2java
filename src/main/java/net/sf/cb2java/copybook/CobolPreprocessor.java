@@ -38,10 +38,10 @@ public class CobolPreprocessor {
 	private CobolPreprocessor() {
 	}
 
-	public static String preProcess(Reader reader) {
+	public static String preProcess(Reader reader, Settings settings) {
     	// TODO: figure out a way to pass copybook specific settings for non-default margins treated as comment.
-		int columnStart = Settings.DEFAULT.getColumnStart();
-		int columnEnd = Settings.DEFAULT.getColumnEnd();
+		int columnStart = settings.getColumnStart();
+		int columnEnd = settings.getColumnEnd();
 
 		StringBuffer sb = new StringBuffer();
 

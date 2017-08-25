@@ -25,6 +25,7 @@ import java.io.PushbackReader;
 import java.io.Reader;
 import java.io.StringReader;
 
+import net.sf.cb2java.Settings;
 import net.sf.cb2xml.sablecc.lexer.Lexer;
 import net.sf.cb2xml.sablecc.lexer.LexerException;
 import net.sf.cb2xml.sablecc.node.Start;
@@ -58,7 +59,12 @@ public class CopybookParser
     {        
         return parse(name, new InputStreamReader(stream));
     }
-    
+
+    public static Copybook parse(Settings settings, String name, InputStream stream)
+    {
+        return parse(settings, name, new InputStreamReader(stream));
+    }
+
     /**
      * Parses a copybook definition and returns a Copybook instance
      * 
@@ -67,16 +73,16 @@ public class CopybookParser
      * 
      * @return a copybook instance containing the parse tree for the definition
      */
-    public static Copybook parse(String name, Reader reader)
+    public static Copybook parse(Settings settings, String name, Reader reader)
     {        
-        String preProcessed = CobolPreprocessor.preProcess(reader);
+        String preProcessed = CobolPreprocessor.preProcess(reader, settings);
         StringReader sr = new StringReader(preProcessed);
         PushbackReader pbr = new PushbackReader(sr, 1000);
         
         Lexer lexer = debug ? new DebugLexer(pbr) : new Lexer(pbr);
         
         Parser parser = new Parser(lexer);
-        CopybookAnalyzer copyBookAnalyzer = new CopybookAnalyzer(name, parser);
+        CopybookAnalyzer copyBookAnalyzer = new CopybookAnalyzer(name, parser, settings);
         Start ast;
         try {
 			ast = parser.parse();
@@ -91,4 +97,10 @@ public class CopybookParser
         
         return copyBookAnalyzer.getDocument();
     }
+
+    public static Copybook parse(String name, Reader reader) {
+
+        return parse(Settings.DEFAULT(), name, reader);
+    }
+
 }
