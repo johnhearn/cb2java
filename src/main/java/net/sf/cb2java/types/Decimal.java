@@ -186,41 +186,49 @@ public class Decimal extends SignedNumeric {
     
     @Override
     public Data parse(byte[] bytes) {
-        String input = getString(bytes).trim();
-        String s = input;
-        
-        if (input.length() < 1) {
-            s = null;
-        } else if (signed()) {
-        	if (getSignPosition() == SignPosition.LEADING) {
-	            char c = input.charAt(0); 
-	            s = (isPositive(c) ? "" : "-") + getNumber(c) 
-	                + (input.length() > 1 ? input.substring(1) : ""); 
-	        } else if (getSignPosition() == SignPosition.TRAILING) {
-	            int last = input.length() - 1; 
-	            char c = input.charAt(last); 
-	            s = (isPositive(c) ? "" : "-") 
-	                + (input.length() > 1 ? input.substring(0, last) : "") + getNumber(c);
-	        } else {
-	        	throw new IllegalStateException("undefined sign position");
-	        }
-        }        
-        BigInteger big = s == null ? null : new BigInteger(s);
-        Data data = create();
-        
-        if (data instanceof DecimalData) {
-            DecimalData dData = (DecimalData) data;
-            BigDecimal bigD = big == null ? null : new BigDecimal(big, decimalPlaces());
-            
-            dData.setValue(bigD);
-            
-            return data;
-        } else {
-            IntegerData iData = (IntegerData) data;
-            
-            iData.setValue(big);
-            
-            return data;
+        try {
+            String input = getString(bytes).trim();
+            String s = input;
+
+            if (input.length() < 1) {
+                s = null;
+            } else if (signed()) {
+                if (getSignPosition() == SignPosition.LEADING) {
+                    char c = input.charAt(0);
+                    s = (isPositive(c) ? "" : "-") + getNumber(c)
+                            + (input.length() > 1 ? input.substring(1) : "");
+                } else if (getSignPosition() == SignPosition.TRAILING) {
+                    int last = input.length() - 1;
+                    char c = input.charAt(last);
+                    s = (isPositive(c) ? "" : "-")
+                            + (input.length() > 1 ? input.substring(0, last) : "") + getNumber(c);
+                } else {
+                    throw new IllegalStateException("undefined sign position");
+                }
+            }
+            BigInteger big = s == null ? null : new BigInteger(s);
+            Data data = create();
+
+            if (data instanceof DecimalData) {
+                DecimalData dData = (DecimalData) data;
+                BigDecimal bigD = big == null ? null : new BigDecimal(big, decimalPlaces());
+
+                dData.setValue(bigD);
+
+                return data;
+            } else {
+                IntegerData iData = (IntegerData) data;
+
+                iData.setValue(big);
+
+                return data;
+            }
+        } catch (RuntimeException e) {
+            if(getSettings().isResiliant()) {
+                return create();
+            } else {
+                throw(e);
+            }
         }
     }
     

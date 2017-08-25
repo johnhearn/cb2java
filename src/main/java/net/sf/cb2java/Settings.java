@@ -32,6 +32,7 @@ public class Settings {
 	int columnStart = 6;
 	int columnEnd = 72;
 	Values values = new Values();
+	boolean resiliant = false;
 
 	static Settings DEFAULT;
 	static public Settings DEFAULT() {
@@ -57,6 +58,7 @@ public class Settings {
 					? SignPosition.LEADING : SignPosition.TRAILING);
 			DEFAULT.setColumnStart(Integer.parseInt(getSetting("column.start", DEFAULT.getColumnStart() + "", props)));
 			DEFAULT.setColumnEnd(Integer.parseInt(getSetting("column.end", DEFAULT.getColumnEnd() + "", props)));
+			DEFAULT.setResiliant("false".equals(getSetting("resilient", DEFAULT.isResiliant() + "", props)));
 		}
 		return DEFAULT;
 	}
@@ -115,6 +117,14 @@ public class Settings {
 
 	public void setValues(Values values) {
 		this.values = values;
+	}
+
+	public boolean isResiliant() {
+		return resiliant;
+	}
+
+	public void setResiliant(boolean resiliant) {
+		this.resiliant = resiliant;
 	}
 
 	static private String getSetting(String name, String defaultValue, Properties props) {
