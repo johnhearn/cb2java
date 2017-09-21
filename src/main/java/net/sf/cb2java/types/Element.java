@@ -185,7 +185,12 @@ public abstract class Element {
      */
     public final String getString(byte[] data) {
         try {
-            return new String(data, getSettings().getEncoding());
+            String value = new String(data, getSettings().getEncoding());
+            if(getSettings().getTrimStrings()) {
+                return value.trim();
+            } else {
+                return value;
+            }
         } catch (UnsupportedEncodingException e) {
             throw new RuntimeException(e);
         } 

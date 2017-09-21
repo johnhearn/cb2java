@@ -33,6 +33,7 @@ public class Settings {
 	int columnEnd = 72;
 	Values values = new Values();
 	boolean resiliant = false;
+	boolean trimStrings = false;
 
 	static Settings DEFAULT;
 	static public Settings DEFAULT() {
@@ -59,6 +60,7 @@ public class Settings {
 			DEFAULT.setColumnStart(Integer.parseInt(getSetting("column.start", DEFAULT.getColumnStart() + "", props)));
 			DEFAULT.setColumnEnd(Integer.parseInt(getSetting("column.end", DEFAULT.getColumnEnd() + "", props)));
 			DEFAULT.setResiliant("false".equals(getSetting("resilient", DEFAULT.isResiliant() + "", props)));
+			DEFAULT.setTrimStrings("true".equals(getSetting("trim", DEFAULT.getTrimStrings() + "", props)));
 		}
 		return DEFAULT;
 	}
@@ -125,6 +127,14 @@ public class Settings {
 
 	public void setResiliant(boolean resiliant) {
 		this.resiliant = resiliant;
+	}
+
+	public boolean getTrimStrings() {
+		return trimStrings;
+	}
+
+	public void setTrimStrings(boolean trimStrings) {
+		this.trimStrings = trimStrings;
 	}
 
 	static private String getSetting(String name, String defaultValue, Properties props) {
