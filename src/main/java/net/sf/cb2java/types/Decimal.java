@@ -49,7 +49,7 @@ public class Decimal extends SignedNumeric {
             return overpunch;
         } else if (positive) {
             switch(overpunch) {
-                case '0': return '{';
+                case '0': return getSettings().getEBCDICVariant().contains("297") ? 'é' : '{';
                 case '1': return 'A';
                 case '2': return 'B';
                 case '3': return 'C';
@@ -71,7 +71,7 @@ public class Decimal extends SignedNumeric {
                 case '3': return 'L';
                 case '2': return 'K';
                 case '1': return 'J';
-                case '0': return '}';
+                case '0': return getSettings().getEBCDICVariant().contains("297") ? 'è' : '}';
             }
         }
         
@@ -98,6 +98,7 @@ public class Decimal extends SignedNumeric {
                 case '7':
                 case '8':
                 case '9':
+                case 'é':
                 case '{':
                 case 'A':
                 case 'B':
@@ -110,6 +111,7 @@ public class Decimal extends SignedNumeric {
                 case 'I':
                     return true;
                 case '0':
+                case 'è':
                 case '}':
                 case 'J':
                 case 'K':
@@ -174,9 +176,11 @@ public class Decimal extends SignedNumeric {
                 case 'J': 
                 case 'A': 
                     return '1';
-                case '0': 
-                case '}': 
-                case '{': 
+                case '0':
+                case '}':
+                case '{':
+                case 'é':
+                case 'è':
                     return '0';
             }
         }

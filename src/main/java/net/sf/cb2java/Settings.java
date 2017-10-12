@@ -34,6 +34,7 @@ public class Settings {
 	Values values = new Values();
 	boolean resiliant = false;
 	boolean trimStrings = false;
+	String EBCDICVariant = "";
 
 	static Settings DEFAULT;
 	static public Settings DEFAULT() {
@@ -61,6 +62,7 @@ public class Settings {
 			DEFAULT.setColumnEnd(Integer.parseInt(getSetting("column.end", DEFAULT.getColumnEnd() + "", props)));
 			DEFAULT.setResiliant("false".equals(getSetting("resilient", DEFAULT.isResiliant() + "", props)));
 			DEFAULT.setTrimStrings("true".equals(getSetting("trim", DEFAULT.getTrimStrings() + "", props)));
+			DEFAULT.setEBCDICVariant(getSetting("EBCDIC-variant", DEFAULT.getEBCDICVariant(), props));
 		}
 		return DEFAULT;
 	}
@@ -136,6 +138,15 @@ public class Settings {
 	public void setTrimStrings(boolean trimStrings) {
 		this.trimStrings = trimStrings;
 	}
+
+	public String getEBCDICVariant() {
+		return EBCDICVariant;
+	}
+
+	public void setEBCDICVariant(String EBCDICVariant) {
+		this.EBCDICVariant = EBCDICVariant;
+	}
+
 
 	static private String getSetting(String name, String defaultValue, Properties props) {
 		String result = defaultValue;
