@@ -20,6 +20,8 @@ package net.sf.cb2java.copybook;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
+
 import net.sf.cb2java.Settings;
 import net.sf.cb2java.Value;
 import net.sf.cb2java.Values;
@@ -42,14 +44,22 @@ class Item
     final boolean document;
     
     final Values values;
+
+    public Settings getSettings() {
+        return settings;
+    }
+
+    final Settings settings;
     
     /**
      * @param analyzer
      */
-    Item(final Values values, final boolean document)
+    Item(final Values values, final boolean document, Settings settings)
     {
         this.values = values;
         this.document = document;
+        this.settings = settings;
+        signPosition = settings.getSignPosition();
     }
 
     String name;
@@ -66,7 +76,7 @@ class Item
     
     boolean isAlpha;
     boolean signSeparate;
-    SignPosition signPosition = Settings.DEFAULT.getSignPosition();
+    SignPosition signPosition;
     
     String picture;
     Value value;
@@ -128,7 +138,7 @@ class Item
     
     private void createDocument()
     {
-        element = new Copybook(name, values);
+        element = new Copybook(name, values, settings);
     }
     
     private void createGroup()

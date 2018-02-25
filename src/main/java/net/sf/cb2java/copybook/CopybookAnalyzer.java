@@ -22,6 +22,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.StringTokenizer;
 
+import net.sf.cb2java.Settings;
 import net.sf.cb2java.Values;
 import net.sf.cb2java.types.Element;
 import net.sf.cb2java.types.Group;
@@ -84,6 +85,7 @@ class CopybookAnalyzer extends DepthFirstAdapter
     private Parser parser;
     private Item document;
     private Item current;
+    private Settings settings;
     
     /**
      * Creates a new instance with the given parser and
@@ -92,12 +94,13 @@ class CopybookAnalyzer extends DepthFirstAdapter
      * @param copyBookName the name to give this copybook
      * @param parser sablecc parser instance 
      */
-	CopybookAnalyzer(String copyBookName, Parser parser)
+	CopybookAnalyzer(String copyBookName, Parser parser, Settings settings)
     {
-        document = new Item(values, true);
+        document = new Item(values, true, settings);
         document.name = copyBookName;
         current = document;
 		this.parser = parser;
+		this.settings = settings;
 	}
 	
 	/**
@@ -127,7 +130,7 @@ class CopybookAnalyzer extends DepthFirstAdapter
 
     private void walkTree(Item item)
     {
-        item.getElement().setSettings((Copybook) document.getElement());
+        item.getElement().setSettings(document.getElement().getSettings());
         
         for (Iterator<?> i = item.children.iterator(); i.hasNext();) {
             Item child = (Item) i.next();
@@ -176,7 +179,7 @@ class CopybookAnalyzer extends DepthFirstAdapter
 	public void inAItem(AItem node)
     {
         Item prevItem = current;
-        current = new Item(values, false);
+        current = new Item(values, false, settings);
         current.level = Integer.parseInt(node.getNumberNot88().toString().trim());
         current.name = node.getDataNameOrFiller().toString().trim();
         
@@ -265,12 +268,12 @@ class CopybookAnalyzer extends DepthFirstAdapter
 
 	public void inALeadingLeadingOrTrailing(ALeadingLeadingOrTrailing node)
     {
-        current.signPosition = SignPosition.LEADING;
+        current.getSettings().setSignPosition(SignPosition.LEADING);
     }
 
     public void inATrailimngLeadingOrTrailing(ALeadingLeadingOrTrailing node)
     {
-        current.signPosition = SignPosition.TRAILING;
+        current.getSettings().setSignPosition(SignPosition.TRAILING);
     }
 
 	//======================= USAGE CLAUSE ==========================

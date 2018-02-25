@@ -42,7 +42,7 @@ public abstract class Element {
     /** the absolute position of the where this item starts in data */
     private int position;
     /** the instance that represents the data that defines this element */
-    private Settings settings = Settings.DEFAULT;
+    private Settings settings;
     /** the default value of this element */
     private Value value;
     /** the parent of this element */
@@ -219,7 +219,7 @@ public abstract class Element {
      * 
      * @return the parent of this element
      */
-    private Group getParent(){
+    public Group getParent(){
         return parent;
     }
     
@@ -237,13 +237,13 @@ public abstract class Element {
      * 
      * @return the settings for this element
      */
-    protected Settings getSettings() {
+    public Settings getSettings() {
         if (settings != null) {
             return settings;
         } else if (getParent() != null) {
             return getParent().getSettings();
         } else {
-            return null;
+            return Settings.DEFAULT();
         }
     }
     

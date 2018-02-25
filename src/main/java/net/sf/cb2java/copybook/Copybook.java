@@ -40,13 +40,8 @@ import net.sf.cb2java.types.SignPosition;
  * 
  * @author James Watson
  */
-public class Copybook extends Group implements Settings
+public class Copybook extends Group //implements Settings
 {
-    private String encoding = Settings.DEFAULT.getEncoding();
-    private boolean littleEndian = Settings.DEFAULT.getLittleEndian();
-    private String floatConversion = Settings.DEFAULT.getFloatConversion();
-    private SignPosition signPosition = Settings.DEFAULT.getSignPosition();
-    
     private Map<String, Element> redefines = new HashMap<String, Element>();
     
     private final Values values;
@@ -56,12 +51,13 @@ public class Copybook extends Group implements Settings
      *
      * @param name the name of the copybook
      */
-    Copybook(String name, Values values)
+    Copybook(String name, Values values, Settings settings)
     {
         super(name, 0, 0);
         
         this.values = values;
-        this.values.setEncoding(encoding);
+        this.setSettings(settings);
+        this.values.setEncoding(settings.getEncoding());
     }
     
     public Values getValues()
@@ -126,67 +122,6 @@ public class Copybook extends Group implements Settings
         
         return list;
     }
-    
-    /**
-     * Sets the encoding for the copybook instance, used for parsing
-     * and writing of data
-     * 
-     * @param encoding the encoding for the system
-     */
-    public void setEncoding(String encoding)
-    {
-        this.encoding = encoding;
-    }
-    
-    /**
-     * retrieves the current encoding for text
-     * 
-     * @return the encoding for text
-     */
-    public String getEncoding()
-    {
-        return encoding;
-    }
-    
-    public void setLittleEndian(boolean littleEndian)
-    {
-        this.littleEndian = littleEndian;
-    }
-    
-    public boolean getLittleEndian()
-    {
-        return littleEndian;
-    }
-    
-    public void setFloatConversion(String className)
-    {
-        this.floatConversion = className;
-    }
-    
-    public String getFloatConversion()
-    {
-        return floatConversion;
-    }
-    
-    public void setSignPosition(SignPosition position)
-    {
-        this.signPosition = position;
-    }
-    
-    public SignPosition getSignPosition()
-    {
-        return signPosition;
-    }
-    
-	@Override
-	public int getColumnStart() {
-		return Settings.DEFAULT.getColumnStart();
-	}
-
-	@Override
-	public int getColumnEnd() {
-		return Settings.DEFAULT.getColumnEnd();
-	}
 
 	/**
      * a helper class for buffering the data as it is processed

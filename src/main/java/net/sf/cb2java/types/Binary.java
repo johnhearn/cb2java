@@ -122,12 +122,12 @@ public class Binary extends Numeric {
         @Override
         public byte[] toBytes(Object data) {
             byte[] bytes = super.toBytes(data);
-            return getSettings().getLittleEndian() ? reverse(bytes) : bytes;
+            return getSettings().isLittleEndian() ? reverse(bytes) : bytes;
         }
         
         @Override
         public Data parse(byte[] input) {
-            return super.parse(getSettings().getLittleEndian() ? reverse(input) : input);
+            return super.parse(getSettings().isLittleEndian() ? reverse(input) : input);
         }
     }
 }
