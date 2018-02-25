@@ -109,7 +109,12 @@ public class Group extends Element {
 
     private byte[] sub(byte[] in, int start, int end) {
         byte[] out = new byte[end - start];
-        System.arraycopy(in, start, out, 0, out.length);
+        if(!getSettings().isResiliant() || start < in.length) {
+                // if resilient, allow for the input to be shorter compared to the copybook definition
+                // and then consider that the values are 0's
+            System.arraycopy(in, start, out, 0,
+                    getSettings().isResiliant() ? Math.min(in.length - start, out.length) : out.length);
+        }
         return out;
     }
     
