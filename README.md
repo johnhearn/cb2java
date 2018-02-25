@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/johnhearn/cb2java.svg?branch=master)](https://travis-ci.org/johnhearn/cb2java)
+
 The CB2Java project's goal is to simplify the lives of developers charged 
 with writing Java applications that communicate
 with COBOL applications. The main motivation for writing this library was
